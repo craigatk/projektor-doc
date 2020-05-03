@@ -22,6 +22,11 @@ summaryLength = 30
     url = "/docs/"
     weight = 2
 
+[[menu.main]]
+    name = "Code"
+    url = "https://github.com/craigatk/projektor"
+    weight = 3
+
 [params]
   google_analytics_id=""
   homepage_button_link = '/docs'
@@ -33,15 +38,15 @@ summaryLength = 30
   enable_anchor_link = true
 
   [params.homepage_meta_tags]
-    meta_description = "Hugo Whisper is a documentation theme built with Hugo."
-    meta_og_title = "Hugo Whisper Theme"
+    meta_description = "Projektor is a convenient way to view full test results from continuous integration (CI) servers"
+    meta_og_title = "Projektor Docs"
     meta_og_type = "website"
-    meta_og_url = "https://hugo-whisper.netlify.com"
+    meta_og_url = "https://projektor.dev"
     meta_og_image = "images/projektor-results-dashboard.png"
-    meta_og_description = "Hugo Whisper is a documentation theme built with Hugo."
+    meta_og_description = "Projektor is a convenient way to view full test results from continuous integration (CI) servers"
     meta_twitter_card = "summary"
-    meta_twitter_site = "@zerostaticio"
-    meta_twitter_creator = "@zerostaticio"
+    meta_twitter_site = "@atk.craig1"
+    meta_twitter_creator = "@atk.craig1"
 
   [params.logo]
       mobile = "/images/projektor-logo.png"
