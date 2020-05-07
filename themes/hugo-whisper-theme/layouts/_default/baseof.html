@@ -66,7 +66,10 @@
   <script type="text/javascript" src="{{ ($scripts | minify | fingerprint).RelPermalink }}"></script>
   {{ end }}
 
-  {{ partial "google-analytics.html" . }}
+  {{ if (.Params.mermaid) }}
+  <!-- MermaidJS support -->
+  <script async src="https://unpkg.com/mermaid@8.5/dist/mermaid.min.js"></script>
+  {{ end }}
 
 </body>
 
