@@ -54,3 +54,33 @@ There are also a couple more optional parameters you can specify:
 ATTACHMENT_AUTO_CREATE_BUCKET=< true to automatically create the bucket on startup if it does not exist >
 ATTACHMENT_MAX_SIZE_MB=< attachments above this max size in MB will be rejected >
 ```
+
+## Metrics
+
+The Projektor server supports publishing metrics via [Micrometer](https://micrometer.io/docs/registry/influx) 
+to [InfluxDB](https://docs.influxdata.com/influxdb/v1.8/). 
+InfluxDB metrics are easy to graph and visualize using tools such as [Grafana](https://grafana.com/docs/grafana/latest/).
+
+### Metrics configuration
+
+Environment variables to set to configure the metrics:
+
+```
+METRICS_INFLUXDB_ENABLED=< true to enable metrics collection and publishing >
+METRICS_INFLUXDB_URI=< URI of the InfluxDB server >
+METRICS_INFLUXDB_DB_NAME=< name of the InfluxDB database to store metrics >
+METRICS_INFLUXDB_AUTO_CREATE_DB=< whether to automatically create the InfluxDB database if it does not already exist >
+METRICS_INFLUXDB_USERNAME=< optional - username for the InfluxDB server if it has auth enabled >
+METRICS_INFLUXDB_PASSWORD=< optional - password for the InfluxDB server if it has auth enabled >
+METRICS_INFLUXDB_INTERVAL=< optional - how often to publish metrics - defaults to every 10 seconds >
+METRICS_INFLUXDB_ENV=< optional - environment tag to add to all metrics >
+```
+
+### Published metrics
+
+The Projektor server is built with [ktor](https://ktor.io) and publishes the default
+ktor server metrics as well as a few custom metrics:
+
+* [ktor default metrics](https://ktor.io/servers/features/metrics-micrometer.html#exposed-metrics)
+* "results_process_success" - when results sent to the server are successfully processed
+* "results_process_failure" - when there is an error processing results sent to the server
