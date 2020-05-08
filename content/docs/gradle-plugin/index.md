@@ -19,7 +19,7 @@ To apply this plugin to your project:
 
 ```
 plugins {
-  id "dev.projektor.publish" version "3.0.0"
+  id "dev.projektor.publish" version "5.0.0"
 }
 ```
 
@@ -36,11 +36,14 @@ This can be a good way to easily share a specific test failure with colleagues.
 
 Note: If you have a multi-project build, please apply the plugin to the root project.
 
-To apply the `ProjektorPublishPlugin` in your plugin:
+### Configure and apply via another plugin
+
+In larger organizations it can be common to have base plugins that apply and configure a common set 
+of plugins used by each project. To apply the `ProjektorPublishPlugin` this way from another plugin:
 
 ```groovy
 dependencies {
-  compile "dev.projektor.publish:dev.projektor.publish.gradle.plugin:4.0.1"
+  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:5.0.0"
 }
 ```
 
@@ -50,7 +53,6 @@ class MyPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         project.repositories {
-            mavenLocal()
             maven { url 'https://plugins.gradle.org/m2/' }
         }
 
@@ -124,13 +126,13 @@ projektor {
 
 | Parameter                 | Type             | Default | Description                                |
 | ------------------------- | ---------------- | ------- | ------------------------------------------ |
-| serverUrl**               | `String`         | null    | Projektor server URL to publish results to |
-| autoPublish               | `boolean`        | true    | Whether results are automatically published at the end of the build |
-| autoPublishOnFailureOnly  | `boolean`        | true    | Whether results on automatically published at the end of the build only on failures |
-| publishTaskEnabled        | `boolean`        | true    | Whether the `publishResults` task is added to support easily manually publishing results by running a task |
-| publishToken              | `String`         | null    | Token to include in publish request to server (only needed when server has publish token set) |
-| additionalResultsDirs     | `List<String>`   | []      | Additional directories to include results from. Useful when you want to include results from a task that isn't `Test` type |
-| attachments               | `List<FileTree>` | []      | FileTrees to include as attachments to the test report and make available in the UI |
-| compressionEnabled        | `boolean`        | true    | Whether to compress the test results with GZIP when sending them to the server |
+| serverUrl**               | `String`         | `null`  | Projektor server URL to publish results to |
+| autoPublish               | `boolean`        | `true`  | Whether results are automatically published at the end of the build |
+| autoPublishOnFailureOnly  | `boolean`        | `true`  | Whether results on automatically published at the end of the build only on failures |
+| publishTaskEnabled        | `boolean`        | `true`  | Whether the `publishResults` task is added to support easily manually publishing results by running a task |
+| publishToken              | `String`         | `null`  | Token to include in publish request to server (only needed when server has publish token set) |
+| additionalResultsDirs     | `List<String>`   | `[]`    | Additional directories to include results from. Useful when you want to include results from a task that isn't `Test` type |
+| attachments               | `List<FileTree>` | `[]`    | FileTrees to include as attachments to the test report and make available in the UI |
+| compressionEnabled        | `boolean`        | `true`  | Whether to compress the test results with GZIP when sending them to the server |
 
 ** _Required_

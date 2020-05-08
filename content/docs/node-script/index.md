@@ -94,6 +94,17 @@ Or in the configuration file:
 }
 ```
 
+## All configuration options
+
+| Parameter           | Type             | Default | Description                                |
+| ------------------- | ---------------- | ------- | ------------------------------------------ |
+| serverUrl**         | `string`         | `null`  | Projektor server URL to publish results to |
+| results**           | `Array<string>`  | `[]`    | Paths to the test results XML files |
+| attachments         | `Array<string>`  | `[]`    | Paths to the files to attach to the test report |
+| exitWithFailure     | `boolean`        | `false` | After publishing exit with a non-zero exit code if there is a test failure |
+
+** _Required_
+
 ## Changelog
 
 * 2.2.0
