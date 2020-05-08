@@ -6,6 +6,9 @@ weight: 3
 summary: Node script for publishing Javascript results to Projektor
 ---
 
+Node script for publishing test results from your Javascript project to the
+Projektor server.
+
 ## Installation
 
 Add the NPM package as a dev dependency with either NPM:
