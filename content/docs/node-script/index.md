@@ -16,6 +16,8 @@ or Yarn
 
 `yarn add -D projektor-publish`
 
+## Usage
+
 Then run this script to publish test results to the Projektor server:
 
 `yarn projektor-publish --serverUrl=<projektor_url> <file_globs>`

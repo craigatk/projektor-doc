@@ -8,9 +8,14 @@ summary: Configuring and running the Projektor server
 
 ## Requirements
 
+* [Projektor server .jar file from releases page](https://github.com/craigatk/projektor/releases)
 * Java 11
 * Postgres
 * (optional) S3-compatible object store for storing attachments
+
+## Startup
+
+To start the server, simply run `java -jar projektor-server-<version>.jar`
 
 ## Database configuration
 
