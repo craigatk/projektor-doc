@@ -15,7 +15,10 @@ summary: Configuring and running the Projektor server
 
 ## Startup
 
-To start the server, simply run `java -jar projektor-server-<version>.jar`
+Set up the environment variables listed below to configure the features you want to use.
+The bare minimum set of configuration to start Projektor is the database URL, username, and password. 
+
+Then to start the server, simply run `java -jar projektor-server-<version>.jar`
 
 ## Database configuration
 

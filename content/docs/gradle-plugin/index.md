@@ -112,6 +112,7 @@ There is also the option to not add the `publishResults` task:
 projektor {
   serverUrl = "https://myserver"
   publishTaskEnabled = false
+}
 ```
 
 You can also include results from arbitrary directories in your build with the `additionalResultsDirs` configuration option:
@@ -120,6 +121,7 @@ You can also include results from arbitrary directories in your build with the `
 projektor {
   serverUrl = "https://myserver"
   additionalResultsDirs = ['build/testResultsDir']
+}
 ```
 
 ### All configuration options
@@ -127,7 +129,7 @@ projektor {
 | Parameter                 | Type             | Default | Description                                |
 | ------------------------- | ---------------- | ------- | ------------------------------------------ |
 | serverUrl**               | `String`         | `null`  | Projektor server URL to publish results to |
-| autoPublish               | `boolean`        | `true`  | Whether results are automatically published at the end of the build |
+| autoPublish               | `boolean`        | `true`  | Whether results are automatically published at the end of the build (by default results are only published if a test fails, which can be controlled using `autoPublishOnFailureOnly`) |
 | autoPublishOnFailureOnly  | `boolean`        | `true`  | Whether results on automatically published at the end of the build only on failures |
 | publishTaskEnabled        | `boolean`        | `true`  | Whether the `publishResults` task is added to support easily manually publishing results by running a task |
 | publishToken              | `String`         | `null`  | Token to include in publish request to server (only needed when server has publish token set) |
