@@ -19,7 +19,7 @@ To apply this plugin to your project:
 
 ```
 plugins {
-  id "dev.projektor.publish" version "5.0.0"
+  id "dev.projektor.publish" version "5.0.1"
 }
 ```
 
@@ -43,7 +43,7 @@ of plugins used by each project. To apply the `ProjektorPublishPlugin` this way 
 
 ```groovy
 dependencies {
-  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:5.0.0"
+  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:5.0.1"
 }
 ```
 
@@ -74,7 +74,7 @@ class MyPlugin implements Plugin<Project> {
 | 2.0.0          | 2.0.0+         | 8+           |
 | 3.0.0          | 2.0.0+         | 8+           |
 | 4.0.0          | 2.0.0+         | 11+          |
-| 5.0.0          | 3.3.0+         | 11+          |
+| 5.0.0+         | 3.3.0+         | 11+          |
 
 ## Configuration
 
@@ -124,17 +124,34 @@ projektor {
 }
 ```
 
+### Resiliency
+
+The plugin includes configurable retry and timeout settings to help make publishing results
+to the Projektor server more resilient against network hiccups:
+
+```
+projektor {
+  serverUrl = "https://myserver"
+  publishRetryMaxAttempts = 3
+  publishRetryInterval = 100
+  publishTimeout = 10_000
+}
+```
+
 ### All configuration options
 
-| Parameter                 | Type             | Default | Description                                |
-| ------------------------- | ---------------- | ------- | ------------------------------------------ |
-| serverUrl**               | `String`         | `null`  | Projektor server URL to publish results to |
-| autoPublish               | `boolean`        | `true`  | Whether results are automatically published at the end of the build (by default results are only published if a test fails, which can be controlled using `autoPublishOnFailureOnly`) |
-| autoPublishOnFailureOnly  | `boolean`        | `true`  | Whether results on automatically published at the end of the build only on failures |
-| publishTaskEnabled        | `boolean`        | `true`  | Whether the `publishResults` task is added to support easily manually publishing results by running a task |
-| publishToken              | `String`         | `null`  | Token to include in publish request to server (only needed when server has publish token set) |
-| additionalResultsDirs     | `List<String>`   | `[]`    | Additional directories to include results from. Useful when you want to include results from a task that isn't `Test` type |
-| attachments               | `List<FileTree>` | `[]`    | FileTrees to include as attachments to the test report and make available in the UI |
-| compressionEnabled        | `boolean`        | `true`  | Whether to compress the test results with GZIP when sending them to the server |
+| Parameter                 | Type             | Default  | Description                                |
+| ------------------------- | ---------------- | -------- | ------------------------------------------ |
+| serverUrl**               | `String`         | `null`   | Projektor server URL to publish results to |
+| autoPublish               | `boolean`        | `true`   | Whether results are automatically published at the end of the build (by default results are only published if a test fails, which can be controlled using `autoPublishOnFailureOnly`) |
+| autoPublishOnFailureOnly  | `boolean`        | `true`   | Whether results on automatically published at the end of the build only on failures |
+| publishTaskEnabled        | `boolean`        | `true`   | Whether the `publishResults` task is added to support easily manually publishing results by running a task |
+| publishToken              | `String`         | `null`   | Token to include in publish request to server (only needed when server has publish token set) |
+| additionalResultsDirs     | `List<String>`   | `[]`     | Additional directories to include results from. Useful when you want to include results from a task that isn't `Test` type |
+| attachments               | `List<FileTree>` | `[]`     | FileTrees to include as attachments to the test report and make available in the UI |
+| compressionEnabled        | `boolean`        | `true`   | Whether to compress the test results with GZIP when sending them to the server |
+| publishRetryMaxAttempts   | `int`            | `3`      | Max number of attempts when retrying publish of results to server |
+| publishRetryInterval      | `long`           | `100`    | Amount to wait (in milliseconds) between retry attempts
+| publishTimeout            | `long`           | `10_000` | Timeout (in milliseconds) to send results to the server | 
 
 ** _Required_
