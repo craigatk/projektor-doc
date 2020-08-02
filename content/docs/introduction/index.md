@@ -30,7 +30,7 @@ Then you will get back the URL to view your results in the Projektor UI.
 
 Projektor shows a summary of all the tests executed as part of your test run:
 
-https://projektorlive.herokuapp.com/tests/42ZQNMQBEBCD
+https://projektorlive.herokuapp.com/tests/PYFUDE19WISR
 
 The summary includes things like number of tests executed, how many passed or failed, etc.
 And if there are any failures, those failure details are shown first on the dashboard:
@@ -40,12 +40,12 @@ https://projektorlive.herokuapp.com/tests/RA1FTOGJBNKD
 To help debug failures in any environment (especially CI), Projektor gives you access
 to the system out and system err from each test:
 
-https://projektorlive.herokuapp.com/tests/42ZQNMQBEBCD/suite/19/systemOut
+https://projektorlive.herokuapp.com/tests/PYFUDE19WISR/suite/3/systemErr
 
 To help you make your test suite faster, Projektor also shows the slowest 10 test cases to find
 which tests to focus on to speed up your overall test run:
 
-https://projektorlive.herokuapp.com/tests/42ZQNMQBEBCD/slow
+https://projektorlive.herokuapp.com/tests/PYFUDE19WISR/slow
 
 ## Architecture
 
