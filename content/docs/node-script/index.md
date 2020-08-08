@@ -99,18 +99,39 @@ Or in the configuration file:
 }
 ```
 
+## Slack message
+
+It can be helpful to proactively notify folks when a CI build fails via Slack.
+To help make that easier, the Projektor Node script has the option to write a formatted Slack
+message in a JSON file. This Slack message includes a direct link to the Projektor test report
+so users can quickly investigate test failures.
+
+To use it, set the `writeSlackMessageFile` parameter and set the `projectName` parameter to the name of your
+project - it is included in the Slack message.
+
+For example:
+
+`yarn projektor-publish --serverUrl=<url> --writeSlackMessageFile --projectName=<project-name> ui/test-results/*.xml`
+
 ## All configuration options
 
-| Parameter           | Type             | Default | Description                                |
-| ------------------- | ---------------- | ------- | ------------------------------------------ |
-| serverUrl**         | `string`         | `null`  | Projektor server URL to publish results to |
-| results**           | `Array<string>`  | `[]`    | Paths to the test results XML files |
-| attachments         | `Array<string>`  | `[]`    | Paths to the files to attach to the test report |
-| exitWithFailure     | `boolean`        | `false` | After publishing exit with a non-zero exit code if there is a test failure |
+| Parameter             | Type             | Default                          | Description                                |
+| --------------------- | ---------------- | -------------------------------- | ------------------------------------------ |
+| serverUrl**           | `string`         | `null`                           | Projektor server URL to publish results to |
+| results**             | `Array<string>`  | `[]`                             | Paths to the test results XML files |
+| attachments           | `Array<string>`  | `[]`                             | Paths to the files to attach to the test report |
+| exitWithFailure       | `boolean`        | `false`                          | After publishing exit with a non-zero exit code if there is a test failure |
+| writeSlackMessageFile | `boolean`        | `false`                          | Writes a Slack message JSON file with a link to the Projektor test report that you can then publish to Slack |
+| projectName           | `string`         | `null`                           | Name of the project to include in the Slack message file |
+| slackMessageFileName  | `string`         | `projektor_failure_message.json` | Name of the Slack message file, if enabled |
 
 ** _Required_
 
 ## Changelog
 
+* 2.3.1
+  * Now log a message if no test results are found in the configured location(s)
+* 2.3.0
+  * Added Slack message file support
 * 2.2.0
   * Added `exitWithFailure` configuration option
