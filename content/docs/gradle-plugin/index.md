@@ -75,6 +75,7 @@ class MyPlugin implements Plugin<Project> {
 | 3.0.0          | 2.0.0+         | 8+           |
 | 4.0.0          | 2.0.0+         | 11+          |
 | 5.0.0+         | 3.3.0+         | 11+          |
+| 5.1.0+         | 3.5.0+         | 11+          |
 
 ## Configuration
 
@@ -138,6 +139,27 @@ projektor {
 }
 ```
 
+### Slack message
+
+It can be helpful to proactively notify folks when a CI build fails via Slack.
+To help make that easier, the Projektor Gradle plugin has the option to write a formatted Slack
+message in a JSON file. This Slack message includes a direct link to the Projektor test report
+so users can quickly investigate test failures.
+
+To use it, set the `writeSlackMessageFile` parameter to `true`.
+
+By default, the Slack message is written to a file named `projektor_failure_message.json`,
+but you can specify your own file name by setting `slackMessageFileName`
+
+### Code coverage
+
+Starting with plugin version `5.1.0` and server `3.5.0`, Projektor has the ability to publish and
+visualize code coverage data as part of the Projektor report. 
+
+To include code coverage stats in your Projektor reports, just use plugin version `5.1.0`, 
+[enable Jacoco in your build](https://docs.gradle.org/current/userguide/jacoco_plugin.html),
+and include the `jacocoTestReport` task with your build.
+
 ### All configuration options
 
 | Parameter                 | Type             | Default  | Description                                |
@@ -152,6 +174,9 @@ projektor {
 | compressionEnabled        | `boolean`        | `true`   | Whether to compress the test results with GZIP when sending them to the server |
 | publishRetryMaxAttempts   | `int`            | `3`      | Max number of attempts when retrying publish of results to server |
 | publishRetryInterval      | `long`           | `100`    | Amount to wait (in milliseconds) between retry attempts
-| publishTimeout            | `long`           | `10_000` | Timeout (in milliseconds) to send results to the server | 
+| publishTimeout            | `long`           | `10_000` | Timeout (in milliseconds) to send results to the server |
+| writeSlackMessageFile     | `boolean`        | `false`  | Whether to write a Slack message file with a link to the Projektor test report |
+| slackMessageFileName      | `String`         |  `projektor_failure_message.json` | Name of the Slack message file (if enabled) |
+| codeCoveragePublish       | `boolean`        | `true`   | Whether to include code coverage data in the Projektor report (if the build has coverage enabled with the Jacoco plugin) |
 
 ** _Required_
