@@ -166,6 +166,8 @@ For an example Projektor report with coverage, check out https://projektorlive.h
 
 Ironically, this example build shows that the code coverage of the coverage parsing module in Projektor is low. Need to work on that.
 
+Update: Coverage for the parsing module looking better now: https://projektorlive.herokuapp.com/tests/0M7BEOCS9VJA/coverage
+
 ### All configuration options
 
 | Parameter                 | Type             | Default  | Description                                |
