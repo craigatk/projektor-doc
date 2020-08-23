@@ -158,7 +158,13 @@ visualize code coverage data as part of the Projektor report.
 
 To include code coverage stats in your Projektor reports, just use plugin version `5.1.0`, 
 [enable Jacoco in your build](https://docs.gradle.org/current/userguide/jacoco_plugin.html),
-and include the `jacocoTestReport` task with your build.
+and include the `jacocoTestReport` task with your build. That's it.
+The Projektor Gradle plugin will automatically configure, collect and upload the XML coverage reports from
+each project in the build that uses Jacoco.
+
+For an example Projektor report with coverage, check out https://projektorlive.herokuapp.com/tests/SUWSHGIRS6JP/coverage
+
+Ironically, this example build shows that the code coverage of the coverage parsing module in Projektor is low. Need to work on that.
 
 ### All configuration options
 
