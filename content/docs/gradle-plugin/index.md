@@ -153,10 +153,10 @@ but you can specify your own file name by setting `slackMessageFileName`
 
 ### Code coverage
 
-Starting with plugin version `5.1.0` and server `3.5.0`, Projektor has the ability to publish and
+Starting with plugin version `5.2.0` and server `3.5.1`, Projektor has the ability to publish and
 visualize code coverage data as part of the Projektor report. 
 
-To include code coverage stats in your Projektor reports, just use plugin version `5.1.0`, 
+To include code coverage stats in your Projektor reports, just use plugin version `5.2.0`, 
 [enable Jacoco in your build](https://docs.gradle.org/current/userguide/jacoco_plugin.html),
 and include the `jacocoTestReport` task with your build. That's it.
 The Projektor Gradle plugin will automatically configure, collect and upload the XML coverage reports from
