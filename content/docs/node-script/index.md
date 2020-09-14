@@ -46,6 +46,33 @@ You can also customize the name of the config file by passing the `--configFile=
 
 `yarn projektor-publish --configFile=projektor.cypress.json`
 
+## Code coverage
+
+Projektor can show code coverage stats alongside test results.
+
+![Projektor Jest code coverage](/images/jest-coverage.png "Projektor Jest code coverage")
+
+Starting with version `2.7.0` you can specify the paths to the Jest coverage XML files
+in the `coverage` parameter.
+
+For example, in the config file:
+
+```
+{
+  "serverUrl": "<url>",
+  "results": [
+    "ui/test-results/*.xml"
+  ],
+  "coverage": [
+     "ui/coverage/*.xml"
+  ]
+}
+```
+
+Or on the command line:
+
+`yarn projektor-publish --serverUrl=<projektor_url> --coverage="ui/coverage/*.xml" ui/test-results/*.xml`
+
 ## Attachments
 
 You can also attach files to the test results, which can be helpful to attach things like screenshots
@@ -119,6 +146,7 @@ For example:
 | --------------------- | ---------------- | -------------------------------- | ------------------------------------------ |
 | serverUrl**           | `string`         | `null`                           | Projektor server URL to publish results to |
 | results**             | `Array<string>`  | `[]`                             | Paths to the test results XML files |
+| coverage              | `Array<string>`  | `[]`                             | Paths to the code coverage XML files to include with the report |
 | attachments           | `Array<string>`  | `[]`                             | Paths to the files to attach to the test report |
 | exitWithFailure       | `boolean`        | `false`                          | After publishing exit with a non-zero exit code if there is a test failure |
 | writeSlackMessageFile | `boolean`        | `false`                          | Writes a Slack message JSON file with a link to the Projektor test report that you can then publish to Slack |
@@ -129,6 +157,8 @@ For example:
 
 ## Changelog
 
+* 2.7.0
+  * Added support for code coverage stats
 * 2.3.1
   * Now log a message if no test results are found in the configured location(s)
 * 2.3.0
