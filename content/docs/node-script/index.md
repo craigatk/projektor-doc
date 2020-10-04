@@ -2,7 +2,7 @@
 title: 'Node script'
 date: 2020-05-02T19:30:08+10:00
 draft: false
-weight: 3
+weight: 5
 summary: Node script for publishing Javascript results to Projektor
 ---
 

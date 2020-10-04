@@ -2,7 +2,7 @@
 title: 'Server'
 date: 2020-05-02T19:30:08+10:00
 draft: false
-weight: 4
+weight: 6
 summary: Configuring and running the Projektor server
 ---
 
