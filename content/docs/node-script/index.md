@@ -157,6 +157,8 @@ For example:
 
 ## Changelog
 
+* 2.8.0
+  * Including whether build was run in CI to support test run duration graph and flaky test detection
 * 2.7.0
   * Added support for code coverage stats
 * 2.3.1
