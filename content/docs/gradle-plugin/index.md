@@ -47,34 +47,6 @@ projektor {
 }
 ```
 
-If you want to disable the auto-publish of results at the end of the build:
-
-```
-projektor {
-  serverUrl = "https://myserver"
-  autoPublish = false
-}
-```
-
-Or if you want to only publish results when the build fails,
-set the `autoPublishOnFailureOnly` configuration value:
-
-```
-projektor {
-  serverUrl = "https://myserver"
-  autoPublishOnFailureOnly = true
-}
-```
-
-There is also the option to not add the `publishResults` task:
-
-```
-projektor {
-  serverUrl = "https://myserver"
-  publishTaskEnabled = false
-}
-```
-
 You can also include results from arbitrary directories in your build with the `additionalResultsDirs` configuration option:
 
 ```
@@ -112,7 +84,7 @@ but you can specify your own file name by setting `slackMessageFileName`
 
 ### Code coverage
 
-Starting with plugin version `5.2.0` and server `3.5.1`, Projektor has the ability to publish and
+Starting with plugin version `5.5.4` and server `3.5.1`, Projektor has the ability to publish and
 visualize code coverage data as part of the Projektor report. 
 
 To include code coverage stats in your Projektor reports, first ensure you are using plugin version `5.5.4` or higher, 
