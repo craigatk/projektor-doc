@@ -2,7 +2,7 @@
 title: 'Node script'
 date: 2020-05-02T19:30:08+10:00
 draft: false
-weight: 5
+weight: 11
 summary: Node script for publishing Javascript results to Projektor
 ---
 
@@ -99,6 +99,14 @@ Or from the command line:
 
 `yarn projektor-publish --serverUrl=<projektor_url> --attachments="ui/cypress/screenshots/*.png" ui/cypress/*.xml`
 
+## Performance test results
+
+Projektor can show individual performance test results and graph performance results over time.
+
+Use the `performance` config parameter to pass performance results to Projektor:
+
+`yarn projektor-publish --serverUrl=<projektor_url> --performance=perf-results/*.json`
+
 ## Exit code when there is a test failure
 
 When running in CI systems it can be handy to combine the execution of tests like Cypress with
@@ -145,11 +153,13 @@ For example:
 | Parameter             | Type             | Default                          | Description                                |
 | --------------------- | ---------------- | -------------------------------- | ------------------------------------------ |
 | serverUrl**           | `string`         | `null`                           | Projektor server URL to publish results to |
-| results**             | `Array<string>`  | `[]`                             | Paths to the test results XML files |
+| results               | `Array<string>`  | `[]`                             | Paths to the test results XML files |
 | coverage              | `Array<string>`  | `[]`                             | Paths to the code coverage XML files to include with the report |
 | attachments           | `Array<string>`  | `[]`                             | Paths to the files to attach to the test report |
+| performance           | `Array<string>`  | `[]`                             | Paths to performance test results files to send to Projektor |
 | exitWithFailure       | `boolean`        | `false`                          | After publishing exit with a non-zero exit code if there is a test failure |
 | writeSlackMessageFile | `boolean`        | `false`                          | Writes a Slack message JSON file with a link to the Projektor test report that you can then publish to Slack |
+| repositoryName        | `string`         | `null`                           | Pass the name of the Git repository in `org/repo` format, useful if running outside CI or Projektor isn't able to auto-detect the repository |
 | projectName           | `string`         | `null`                           | Name of the project to include in the Slack message file |
 | slackMessageFileName  | `string`         | `projektor_failure_message.json` | Name of the Slack message file, if enabled |
 
@@ -157,6 +167,14 @@ For example:
 
 ## Changelog
 
+* 2.12.0
+  * Logging error message from Projektor server when sending results or coverage fails
+* 2.11.0
+  * Adding support for passing repository name
+* 2.10.0
+  * Adding support for publishing performance results
+* 2.9.0
+  * Adding compression support when sending test results
 * 2.8.0
   * Including whether build was run in CI to support test run duration graph and flaky test detection
 * 2.7.0

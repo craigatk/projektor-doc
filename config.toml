@@ -2,7 +2,7 @@ baseURL = "/"
 themesDir = "themes"
 theme = "hugo-whisper-theme"
 languageCode = "en-us"
-title = "Projektor Docs"
+title = "Projektor"
 
 pygmentsCodeFences = true
 pygmentsCodefencesGuessSyntax = true
@@ -31,8 +31,10 @@ summaryLength = 30
   google_analytics_id=""
   homepage_button_link = '/docs'
   homepage_button_text = 'Read The Docs'
-  homepage_intro = 'Projektor is a convenient way to view full test results from continuous integration (CI) servers'
-  homepage_image = '/images/projektor-results-dashboard.png'
+  homepage_intro = 'View full test results, code coverage data, performance test stats, and more from your project with Projektor'
+  homepage_image = '/images/home/projektor-results-dashboard.png'
+  homepage_image_2 = '/images/home/projektor-code-coverage-graph.png'
+  homepage_image_3 = '/images/home/projektor-performance-graph-full.png'
 
   ## You can enable to add anchor links to header elements
   enable_anchor_link = true
@@ -42,7 +44,7 @@ summaryLength = 30
     meta_og_title = "Projektor Docs"
     meta_og_type = "website"
     meta_og_url = "https://projektor.dev"
-    meta_og_image = "images/projektor-results-dashboard.png"
+    meta_og_image = "images/home/projektor-results-dashboard.png"
     meta_og_description = "Projektor is a convenient way to view full test results from continuous integration (CI) servers"
     meta_twitter_card = "summary"
     meta_twitter_site = "@atk.craig1"

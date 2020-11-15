@@ -2,7 +2,7 @@
 title: 'Flaky test detection'
 date: 2020-10-04T19:30:08+10:00
 draft: false
-weight: 3
+weight: 5
 summary: Flaky test detection with Projektor
 ---
 

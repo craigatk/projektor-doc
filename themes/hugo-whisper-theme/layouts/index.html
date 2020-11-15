@@ -38,11 +38,39 @@
 
 {{ if .Site.Params.homepage_image }}
 <div class="strip">
-  <div class="container pt-4 pb-4">
+  <div class="container pt-2 pb-2">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 screenshot">
+        <div class=" terminal">
+          <img src="{{ .Site.Params.homepage_image | relURL}}" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ if .Site.Params.homepage_image_2 }}
+<div class="strip">
+  <div class="container pt-2 pb-2">
     <div class="row justify-content-center">
       <div class="col-12 col-md-10">
-        <div class="terminal">
-          <img src="{{ .Site.Params.homepage_image | relURL}}" />
+        <div class="screenshot">
+          <img src="{{ .Site.Params.homepage_image_2 | relURL}}" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ if .Site.Params.homepage_image_3 }}
+<div class="strip">
+  <div class="container pt-2 pb-2">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10">
+        <div class="screenshot">
+          <img src="{{ .Site.Params.homepage_image_3 | relURL}}" />
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@
 title: 'Gradle plugin'
 date: 2020-05-02T19:30:08+10:00
 draft: false
-weight: 4
+weight: 10
 summary: Gradle plugin for easily publishing Javascript results to Projektor
 ---
 
