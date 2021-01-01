@@ -3,7 +3,7 @@ title: 'Gradle plugin'
 date: 2020-05-02T19:30:08+10:00
 draft: false
 weight: 10
-summary: Gradle plugin for easily publishing Javascript results to Projektor
+summary: Gradle plugin for easily publishing test results and code coverage statistics to Projektor
 ---
 
 This Gradle plugin supports automatically gathering and publishing
@@ -19,7 +19,7 @@ To apply this plugin to your project:
 
 ```
 plugins {
-  id "dev.projektor.publish" version "6.0.0"
+  id "dev.projektor.publish" version "7.2.0"
 }
 ```
 
@@ -139,7 +139,7 @@ of plugins used by each project. To apply the `ProjektorPublishPlugin` this way 
 
 ```groovy
 dependencies {
-  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:6.0.0"
+  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:7.2.0"
 }
 ```
 
