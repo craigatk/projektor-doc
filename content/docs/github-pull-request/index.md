@@ -21,3 +21,10 @@ The pull request comment has the following:
 
 Projektor will update the pull request comment with additional test reports when the code pull request is updated
 and more builds run.
+
+## Requirements
+
+For the pull request comments you'll need to be using at least the following versions of the Projektor publishing plugins:
+
+* Gradle plugin `7.1.0`+
+* Node script `3.1.0`+
