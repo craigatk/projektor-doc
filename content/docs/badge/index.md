@@ -6,6 +6,11 @@ weight: 7
 summary: Badge for project readme with code coverage stats
 ---
 
+Badges in your project's readme can be a great way to give viewers a quick high-level
+look at some of your project's key stats.
+
+## Coverage
+
 You can display the code coverage percentage for your project directly
 on your project's readme page with Projektor.
 
