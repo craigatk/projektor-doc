@@ -99,6 +99,22 @@ Ironically, this example build shows that the code coverage of the coverage pars
 
 Update: Coverage for the parsing module looking better now: https://projektorlive.herokuapp.com/tests/0M7BEOCS9VJA/coverage
 
+#### Combining code coverage from multiple test tasks
+
+Some projects have separate test tasks, such as `test` and `integrationTest`.
+Projektor will automatically collect coverage stats for all projects in a multi-project build,
+but if your project has multiple test tasks in the same project you'll need a bit of extra configuration
+in your `build.gradle` file to have Jacoco combine the coverage data from the different test tasks
+before the coverage data is sent to the Projektor server:
+
+```
+// Combine the coverage data from the all test tasks into a single coverage report under the "jacocoTestReport" task
+jacocoTestReport {
+    dependsOn tasks.withType(Test)
+    executionData { tasks.withType(Test)*.jacoco.destinationFile }
+}
+```
+
 ### All configuration options
 
 | Parameter                 | Type             | Default  | Description                                |
