@@ -18,7 +18,8 @@ your test suite and save your sanity.
 
 ![Flaky tests](/images/flaky-tests.png "Flaky tests")
 
-Projektor considers a test flaky if it fails at least 5 times out of the last 50 builds.
+By default Projektor considers a test flaky if it fails at least 5 times out of the last 50 builds,
+but you can change those values as needed for your project.
 
 To get to the flaky tests page, click on the "Repository" link on the left side nav in a test report.
 
