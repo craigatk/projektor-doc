@@ -49,17 +49,4 @@ https://projektorlive.herokuapp.com/tests/PYFUDE19WISR/slow
 
 ## Architecture
 
-{{<mermaid>}}
-graph TD;
-  testRun[Test run];
-  plugin("Projektor plugin (Gradle or Node)");
-  server(Projektor server);
-  database[(Postgres)];
-  objectStore[(Object store)];
-  ui(Projektor UI);
-  testRun-- collect test results -->plugin;
-  plugin-- parse and store results -->server;
-  server-- store test results -->database;
-  server-- store attachments -->objectStore;
-  server-- view results -->ui;
-{{</mermaid>}}
+![Projektor architecture](/images/introduction/Projektor-architecture.png "Projektor architecture")
