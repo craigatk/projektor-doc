@@ -147,3 +147,23 @@ GITHUB_APP_ID=<GitHub app ID for the Projektor GitHub app instance>
 GITHUB_PRIVATE_KEY<Base64-encoded private key for the Projektor GitHub app>
 ```
 
+## Troubleshooting
+
+As with any software app, sometimes things go wrong when the Projektor server is
+processing incoming test results and coverage reports. Sometimes these problems
+are related to the incoming data (malformed test results .xml files, etc.),
+issues reaching the database, etc.
+
+To help diagnose what exactly happened when processing incoming results fails,
+Projektor has an admin screen at `/admin` where you can view the most recent failures:
+
+![Server failures](/images/server/projektor-admin-failures.png "Server failures")
+
+By default the screen will show the last 10 failures, but you can specify
+to load more failures as needed.
+
+In addition to the failure message, sometimes it is helpful to look at the raw
+incoming results body to help identify what went wrong. As these results bodies are
+huge it's often more helpful to view them in an IDE where you can auto-format the payload
+for easier viewing. To do that, you can click the link to copy the results body
+to your clipboard then paste it into your favorite editor for easier formatting.
