@@ -90,5 +90,60 @@ The Projektor server is built with [ktor](https://ktor.io) and publishes the def
 ktor server metrics as well as a few custom metrics:
 
 * [ktor default metrics](https://ktor.io/servers/features/metrics-micrometer.html#exposed-metrics)
-* "results_process_success" - when results sent to the server are successfully processed
-* "results_process_failure" - when there is an error processing results sent to the server
+* `results_process_start` - when results processing starts
+* `results_process_success` - when results sent to the server are successfully processed
+* `results_parse_failure` - when there is an error parsing the results sent to the server
+* `results_process_failure` - when there is an error processing results (any error besides a parse error)
+* `coverage_process_start` - when processing a code coverage report starts
+* `coverage_process_success` - when a code coverage report sent to the server is successfully processed
+* `coverage_parse_failure` - when there is an error parsing a code coverage report sent to the server
+* `coverage_process_failure` - when there is an error processing a code coverage report (any error besides a parse error)
+* `pull_request_comment_success` - when the server successfully comments on a pull request
+* `pull_request_comment_failure` - when there is a failure commenting a pull request
+
+The list of metrics is also in the server codebase in `MetricsService.kt`
+
+### Database cleanup
+
+To keep the database size manageable, Projektor has a scheduled job that runs once a day 
+and cleans up test runs and attachments that are older than a specified number of days:
+
+```
+MAX_REPORT_AGE_DAYS=<test runs created more than X days will be deleted>
+MAX_ATTACHMENT_AGE_DAYS<attachments created more than X days ago will be deleted>
+CLEANUP_DRY_RUN<optional - set to true to just log the number of reports that would be cleaned up and not actually delete them>
+```
+
+### Messages
+
+It can be helpful to display a message to all users in the Projektor UI if
+you want to notify them of upcoming changes, etc. To do that, set this
+environment variable:
+
+```
+GLOBAL_MESSAGES=<Messages to display to all users in the Projektor UI. If you want to show multiple messages, use a pipe | to separate them. > 
+```
+
+### GitHub links
+
+Projektor can link directly to files in the GitHub UI, for example linking to uncovered or partial lines
+on the code coverage page. To enable that linking capability, you'll need to set the
+base URL for GitHub (either public GitHub or a GitHub enterprise instance):
+
+```
+GITHUB_BASE_URL=<base URL of the GitHub instance, for example https://github.com for public GitHub>
+```
+
+### GitHub pull request comments
+
+Projektor can [comment on pull requests](../github-pull-request) with direct links to the Projektor
+report, test pass/fail counts, code coverage stats, etc. To help configure that capability, set the following
+environment variables:
+
+```
+SERVER_BASE_URL=<base URL of the Projektor server>
+GITHUB_API_URL=<base URL of the GitHub API, either the public GitHub API or a GitHub Enterprise instance. For example, for public GitHub use https://api.github.com
+GITHUB_APP_ID=<GitHub app ID for the Projektor GitHub app instance>
+GITHUB_PRIVATE_KEY<Base64-encoded private key for the Projektor GitHub app>
+```
+
