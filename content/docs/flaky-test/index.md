@@ -21,6 +21,13 @@ your test suite and save your sanity.
 By default Projektor considers a test flaky if it fails at least 5 times out of the last 50 builds,
 but you can change those values as needed for your project.
 
+Often test runs for pull request branches have more test failures due to the
+code/tests being refined in those branches, so sometimes those failures on PR branches
+can make it harder to find which tests are flaky.
+To help with that, Projektor has the ability
+to filter down to just failures on the mainline (`main` or `master` branch) when
+calculating which tests are flaky.
+
 To get to the flaky tests page, click on the "Repository" link on the left side nav in a test report.
 
 ## Prerequisites
