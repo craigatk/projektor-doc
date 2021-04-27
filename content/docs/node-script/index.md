@@ -162,6 +162,8 @@ For example:
 | repositoryName        | `string`         | `null`                           | Pass the name of the Git repository in `org/repo` format, useful if running outside CI or Projektor isn't able to auto-detect the repository |
 | projectName           | `string`         | `null`                           | Name of the project to include in the Slack message file |
 | slackMessageFileName  | `string`         | `projektor_failure_message.json` | Name of the Slack message file, if enabled |
+| resultsMaxSizeMB      | `string`         | `20`                             | Max size of the combined test results payload, in MB. Uploading the results will fail if the combined test results payload exceeds this size. |
+| attachmentMaxSizeMB   | `string`         | `20`                             | Max size of individual attachments, in MB. Uploading an individual attachment will fail if the attachment exceeds this size. |
 
 ** _Required_
 
