@@ -159,9 +159,10 @@ For example:
 | performance           | `Array<string>`  | `[]`                             | Paths to performance test results files to send to Projektor |
 | exitWithFailure       | `boolean`        | `false`                          | After publishing exit with a non-zero exit code if there is a test failure |
 | writeSlackMessageFile | `boolean`        | `false`                          | Writes a Slack message JSON file with a link to the Projektor test report that you can then publish to Slack |
-| repositoryName        | `string`         | `null`                           | Pass the name of the Git repository in `org/repo` format, useful if running outside CI or Projektor isn't able to auto-detect the repository |
-| projectName           | `string`         | `null`                           | Name of the project to include in the Slack message file |
+| slackProjectName      | `string`         | `null`                           | Name of the project to include in the Slack message file. |
 | slackMessageFileName  | `string`         | `projektor_failure_message.json` | Name of the Slack message file, if enabled |
+| repositoryName        | `string`         | `null`                           | Pass the name of the Git repository in `org/repo` format, useful if running outside CI or Projektor isn't able to auto-detect the repository |
+| projectName           | `string`         | `null`                           | Differentiate different projects in the same repo. Will also be used as the name of the project in the Slack message file if `slackProjectName` is not set. |
 | resultsMaxSizeMB      | `string`         | `20`                             | Max size of the combined test results payload, in MB. Uploading the results will fail if the combined test results payload exceeds this size. |
 | attachmentMaxSizeMB   | `string`         | `20`                             | Max size of individual attachments, in MB. Uploading an individual attachment will fail if the attachment exceeds this size. |
 
@@ -169,6 +170,32 @@ For example:
 
 ## Changelog
 
+* 3.5.0
+  * Adding `slackProjectName` param for specific Slack message file
+* 3.4.3
+  * Write passing Slack message file in Node script
+* 3.4.2
+  * Include coverage file paths in log message
+* 3.4.1
+  * Updating lodash dependency version
+* 3.4.0
+  * Adding group field for appending results
+* 3.3.0
+  * Adding support for configurable results max body size with default 20MB
+* 3.2.0
+  * Making attachment max size configurable in Node script and defaulting it to 20 MB
+* 3.1.2
+  * Adding Drone Git environment variables to Node script
+* 3.1.1
+  * Updating to axios 0.21.1
+* 3.1.0
+  * Passing pull request number from Node script
+* 3.0.0
+  * Sending coverage along with results and including commit SHA
+* 2.13.1
+  * Adding base path to coverage in Node script
+* 2.13.0
+  * Adding base path to coverage in Node script
 * 2.12.0
   * Logging error message from Projektor server when sending results or coverage fails
 * 2.11.0
