@@ -141,7 +141,7 @@ To help make that easier, the Projektor Node script has the option to write a fo
 message in a JSON file. This Slack message includes a direct link to the Projektor test report
 so users can quickly investigate test failures.
 
-To use it, set the `writeSlackMessageFile` parameter and set the `projectName` parameter to the name of your
+To use it, set the `writeSlackMessageFile` parameter and set the `slackProjectName` parameter to the name of your
 project - it is included in the Slack message.
 
 For example:
