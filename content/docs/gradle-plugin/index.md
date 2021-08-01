@@ -133,6 +133,7 @@ jacocoTestReport {
 | writeSlackMessageFile     | `boolean`        | `false`  | Whether to write a Slack message file with a link to the Projektor test report |
 | slackMessageFileName      | `String`         |  `projektor_failure_message.json` | Name of the Slack message file (if enabled) |
 | codeCoveragePublish       | `boolean`        | `true`   | Whether to include code coverage data in the Projektor report (if the build has coverage enabled with the Jacoco plugin) |
+| gitMainBranchNames        | `List<String>`   | `["main", "master"]`              | List of the mainline branches for this repo. Mainline branches are used when calculating things like current code coverage for the repo. |
 
 ** _Required_
 

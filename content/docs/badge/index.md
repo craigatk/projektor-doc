@@ -28,3 +28,12 @@ And on the coverage page for the repository:
 ![Repository coverage badge](/images/badge/repo-code-coverage-badge.png "Repository coverage badge")
 
 Then paste the copied Markdown code into your project's Markdown readme file.
+
+### Configure branches used for coverage badge
+
+Projektor uses the coverage from most recent mainline branch when displaying the code coverage badge 
+so it only includes reviewed / merged code instead of code from pull request branches.
+
+By default, Projektor considers "main" and "master" as mainline branches, but that can be configured 
+if a specific repo uses different branch(es) for the mainline branch (such as "develop").
+See the `gitMainBranchNames` config param in the [Gradle plugin](/docs/gradle-plugin/#all-configuration-options) or [Node script](/docs/node-script#all-configuration-options) docs.

@@ -165,11 +165,14 @@ For example:
 | projectName           | `string`         | `null`                           | Differentiate different projects in the same repo. Will also be used as the name of the project in the Slack message file if `slackProjectName` is not set. |
 | resultsMaxSizeMB      | `string`         | `20`                             | Max size of the combined test results payload, in MB. Uploading the results will fail if the combined test results payload exceeds this size. |
 | attachmentMaxSizeMB   | `string`         | `20`                             | Max size of individual attachments, in MB. Uploading an individual attachment will fail if the attachment exceeds this size. |
+| gitMainBranchNames    | `string`         | `main,master`                    | Comma-separated list of the mainline branches for this repo. Mainline branches are used when calculating things like current code coverage for the repo. |
 
 ** _Required_
 
 ## Changelog
 
+* 3.6.0
+  * Making Git main branch names configurable with new `gitMainBranchNames` param 
 * 3.5.0
   * Adding `slackProjectName` param for specific Slack message file
 * 3.4.3
