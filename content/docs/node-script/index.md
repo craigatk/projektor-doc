@@ -158,6 +158,7 @@ For example:
 | attachments           | `Array<string>`  | `[]`                             | Paths to the files to attach to the test report |
 | performance           | `Array<string>`  | `[]`                             | Paths to performance test results files to send to Projektor |
 | exitWithFailure       | `boolean`        | `false`                          | After publishing exit with a non-zero exit code if there is a test failure |
+| failOnPublishError    | `boolean`        | `false`                          | Exit with a non-zero exit code if the server returns an error when publishing results |
 | writeSlackMessageFile | `boolean`        | `false`                          | Writes a Slack message JSON file with a link to the Projektor test report that you can then publish to Slack |
 | slackProjectName      | `string`         | `null`                           | Name of the project to include in the Slack message file. |
 | slackMessageFileName  | `string`         | `projektor_failure_message.json` | Name of the Slack message file, if enabled |
