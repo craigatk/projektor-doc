@@ -19,7 +19,7 @@ To apply this plugin to your project:
 
 ```
 plugins {
-  id "dev.projektor.publish" version "7.2.0"
+  id "dev.projektor.publish" version "7.5.0"
 }
 ```
 
@@ -115,6 +115,31 @@ jacocoTestReport {
 }
 ```
 
+### Code quality reports
+
+Projektor supports any and all code quality tools (linting, static analysis, etc.) that can output their results in text files.
+
+To be able to see the code quality reports in your Projektor build,
+pass the paths to the reports in the `codeQualityReports` plugin config parameter.
+
+For example, to collect the text reports from the `ktlint` tool in a single-project Gradle build:
+
+```
+projektor {
+    serverUrl = "https://myserver"
+    codeQualityReports = [fileTree(dir: "build/reports/ktlint", include: "*.txt")]
+}
+```
+
+Or to collect the reports from a Gradle multi-project build:
+
+```
+projektor {
+    serverUrl = "https://myserver"
+    codeQualityReports = [fileTree(dir: ".", include: "**/build/reports/ktlint/**/*.txt")]
+}
+```
+
 ### All configuration options
 
 | Parameter                 | Type             | Default  | Description                                |
@@ -126,6 +151,7 @@ jacocoTestReport {
 | publishToken              | `String`         | `null`   | Token to include in publish request to server (only needed when server has publish token set) |
 | additionalResultsDirs     | `List<String>`   | `[]`     | Additional directories to include results from. Useful when you want to include results from a task that isn't `Test` type |
 | attachments               | `List<FileTree>` | `[]`     | FileTrees to include as attachments to the test report and make available in the UI |
+| codeQualityReports        | `List<FileTree>` | `[]`     | Patterns for any code quality reports you want to include in your test report |
 | compressionEnabled        | `boolean`        | `true`   | Whether to compress the test results with GZIP when sending them to the server |
 | publishRetryMaxAttempts   | `int`            | `3`      | Max number of attempts when retrying publish of results to server |
 | publishRetryInterval      | `long`           | `100`    | Amount to wait (in milliseconds) between retry attempts
@@ -156,7 +182,7 @@ of plugins used by each project. To apply the `ProjektorPublishPlugin` this way 
 
 ```groovy
 dependencies {
-  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:7.2.0"
+  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:7.5.0"
 }
 ```
 
