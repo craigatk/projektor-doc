@@ -19,7 +19,7 @@ To apply this plugin to your project:
 
 ```
 plugins {
-  id "dev.projektor.publish" version "7.5.0"
+  id "dev.projektor.publish" version "7.5.1"
 }
 ```
 
@@ -117,6 +117,7 @@ jacocoTestReport {
 
 ### Code quality reports
 
+Starting with Gradle plugin `7.5.1`, 
 Projektor supports any and all code quality tools (linting, static analysis, etc.) that can output their results in text files.
 
 To be able to see the code quality reports in your Projektor build,
@@ -182,7 +183,7 @@ of plugins used by each project. To apply the `ProjektorPublishPlugin` this way 
 
 ```groovy
 dependencies {
-  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:7.5.0"
+  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:7.5.1"
 }
 ```
 
