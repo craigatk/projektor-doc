@@ -175,6 +175,7 @@ projektor {
 | 4.0.0          | 2.0.0+         | 11+          |
 | 5.0.0+         | 3.3.0+         | 11+          |
 | 5.1.0+         | 3.5.0+         | 11+          |
+| 7.0.0+         | 4.0.0+         | 11+          |
 
 ## Configure and apply via another plugin
 
@@ -204,3 +205,66 @@ class MyPlugin implements Plugin<Project> {
     }
 }
 ```
+
+## Changelog
+
+* 7.5.1
+  * Beefing up logging for code quality reports
+* 7.5.0
+  * Adding initial support for code quality reports
+* 7.4.0
+  * Adding support for code coverage in Gradle plugin publish task
+* 7.3.0
+  * Adding support for sending group name for appending results together
+* 7.2.3
+  * Improve handling of Gradle task graph not being ready yet
+* 7.2.2
+  * Guard against Gradle plugin failure when syncing project in IDE
+* 7.2.1
+  * Guard against Gradle plugin failure when syncing project in IDE
+* 7.2.0
+  * Sending pull request number from Gradle plugin
+* 7.1.0
+  * Passing Git commit SHA from Gradle plugin
+* 7.0.0
+  * Combining coverage results with test results in Gradle plugins
+* 6.2.1
+  * Removing deprecated AbstractTask from Gradle plugin
+* 6.2.0
+  * Adding coverage base file path
+* 6.1.0
+  * Compressing coverage reports in Gradle plugin for improved performance when sending them to the server
+* 6.0.0
+  * Always publish in CI from Gradle plugin
+* 5.6.1
+  * Don't publish when no test results or coverage data
+* 5.6.0
+  * Passing is-CI flag from Gradle plugin to server
+* 5.5.6
+  * Adding wall clock duration to Gradle plugin
+* 5.5.4
+  * Making Gradle plugin backwards compatible with Gradle 5
+* 5.5.3
+  * Adding test report ID to results file written by Gradle plugin
+* 5.5.2
+  * Update Gradle plugin CI calculation to support CI env variable set to some arbitrary string value instead of just 'true'
+* 5.5.1
+  * Always publish coverage report in CI
+* 5.5.0
+  * Always publish all coverage reports so comparisons are apples to apples
+* 5.4.0
+  * Writing file with link to report in Gradle plugin
+* 5.2.0
+  * Enabling publish by default in CI when code coverage is present
+* 5.1.0
+  * Initial support for Jacoco coverage stats
+* 5.0.3
+  * Upping failure stacktrace to info level for easier debugging
+* 5.0.2
+  * Adding support for writing Slack message to file
+* 5.0.1
+  * Adding configurable retries to Gradle plugin
+* 5.0.0
+  * Adding compression to the results call from the Gradle plugin
+* 4.0.2
+  * Don't show large stacktrace on Gradle plugin post failure
