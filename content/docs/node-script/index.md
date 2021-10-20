@@ -172,6 +172,8 @@ For example:
 
 ## Changelog
 
+* 3.7.0
+  * Adding flag to fail if publish error from server
 * 3.6.0
   * Making Git main branch names configurable with new `gitMainBranchNames` param 
 * 3.5.0
