@@ -208,6 +208,8 @@ class MyPlugin implements Plugin<Project> {
 
 ## Changelog
 
+* 7.5.2
+  * Don't log task-graph-not-ready stacktrace when executing Gradle task that doesn't exist
 * 7.5.1
   * Beefing up logging for code quality reports
 * 7.5.0
