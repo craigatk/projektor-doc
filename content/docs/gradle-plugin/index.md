@@ -19,7 +19,7 @@ To apply this plugin to your project:
 
 ```
 plugins {
-  id "dev.projektor.publish" version "7.5.1"
+  id "dev.projektor.publish" version "7.5.2"
 }
 ```
 
@@ -184,7 +184,7 @@ of plugins used by each project. To apply the `ProjektorPublishPlugin` this way 
 
 ```groovy
 dependencies {
-  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:7.5.1"
+  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:7.5.2"
 }
 ```
 
