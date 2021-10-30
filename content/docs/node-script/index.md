@@ -157,6 +157,7 @@ For example:
 | coverage              | `Array<string>`  | `[]`                             | Paths to the code coverage XML files to include with the report |
 | attachments           | `Array<string>`  | `[]`                             | Paths to the files to attach to the test report |
 | performance           | `Array<string>`  | `[]`                             | Paths to performance test results files to send to Projektor |
+| codeQuality           | `Array<string>`  | `[]`                             | Paths for any code quality report files you want to send to Projektor |
 | exitWithFailure       | `boolean`        | `false`                          | After publishing exit with a non-zero exit code if there is a test failure |
 | failOnPublishError    | `boolean`        | `false`                          | Exit with a non-zero exit code if the server returns an error when publishing results |
 | writeSlackMessageFile | `boolean`        | `false`                          | Writes a Slack message JSON file with a link to the Projektor test report that you can then publish to Slack |
@@ -172,6 +173,10 @@ For example:
 
 ## Changelog
 
+* 3.9.0
+  * Adding support for code quality files
+* 3.8.0
+  * Write specific Slack message file if no results found 
 * 3.7.0
   * Adding flag to fail if publish error from server
 * 3.6.0
