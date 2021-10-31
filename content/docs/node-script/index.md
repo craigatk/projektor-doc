@@ -148,6 +148,18 @@ For example:
 
 `yarn projektor-publish --serverUrl=<url> --writeSlackMessageFile --projectName=<project-name> ui/test-results/*.xml`
 
+### Code quality reports
+
+Starting with Node script `3.9.0`,
+Projektor supports any and all code quality tools (linting, static analysis, etc.) that can output their results in text files.
+
+To be able to see the code quality reports in your Projektor build,
+pass the paths to the reports in the `codeQuality` config parameter.
+
+For example:
+
+`yarn projektor-publish --serverUrl=<url> --codeQuality=ui/reports/*.txt ui/test-results/*.xml`
+
 ## All configuration options
 
 | Parameter             | Type             | Default                          | Description                                |

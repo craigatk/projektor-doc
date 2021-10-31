@@ -26,3 +26,4 @@ code quality report text file.
 To publish code quality reports to Projektor, please see the publishing config for:
 
 * [Gradle plugin](../gradle-plugin/#code-quality-reports)
+* [Node script](../node-script/#code-quality-reports)
