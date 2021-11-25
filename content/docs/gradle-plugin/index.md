@@ -208,6 +208,10 @@ class MyPlugin implements Plugin<Project> {
 
 ## Changelog
 
+* 7.7.0
+  * Tweaking retry config in Gradle plugin to work with Java 17
+* 7.6.0
+  * Use non-deprecated report properties when available
 * 7.5.2
   * Don't log task-graph-not-ready stacktrace when executing Gradle task that doesn't exist
 * 7.5.1

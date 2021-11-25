@@ -185,6 +185,8 @@ For example:
 
 ## Changelog
 
+* 3.10.0
+  *  Can publish code coverage results by themselves without any test results files
 * 3.9.0
   * Adding support for code quality files
 * 3.8.0
