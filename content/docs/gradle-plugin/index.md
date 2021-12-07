@@ -99,6 +99,26 @@ Ironically, this example build shows that the code coverage of the coverage pars
 
 Update: Coverage for the parsing module looking better now: https://projektorlive.herokuapp.com/tests/0M7BEOCS9VJA/coverage
 
+#### Kover code coverage
+
+Kover is a recent code coverage tool from JetBrains for the Kotlin language: https://github.com/Kotlin/kotlinx-kover
+
+Starting in Projektor Gradle plugin `7.8.0` Projektor supports gathering and publishing reports
+from the Kover plugin when it is configured to use the Jacoco engine.
+
+Projektor supports gathering Jacoco and Kover reports from different subprojects in a multi-project build.
+For example, you may have a multi-project build where some subprojects use Java so they gather code
+coverage with the Jacoco plugin and other Kotlin subprojects that use Kover for code coverage.
+
+But don't add both the Jacoco and Kover Gradle plugins in the same subproject, only use one or the other.
+Otherwise, you may get duplicate coverage reports in Projektor.
+
+Key for using Kover coverage with Projektor:
+
+* Use Projektor Gradle plugin `7.8.0` or higher
+* Configure Kover to use the Jacoco engine
+* Only have the Kover Gradle plugin in the project, don't add the Jacoco Gradle plugin as well
+
 #### Combining code coverage from multiple test tasks
 
 Some projects have separate test tasks, such as `test` and `integrationTest`.
@@ -208,6 +228,8 @@ class MyPlugin implements Plugin<Project> {
 
 ## Changelog
 
+* 7.8.0
+  * Adding support for Kover code coverage
 * 7.7.0
   * Tweaking retry config in Gradle plugin to work with Java 17
 * 7.6.0
