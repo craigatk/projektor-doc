@@ -19,7 +19,7 @@ To apply this plugin to your project:
 
 ```
 plugins {
-  id "dev.projektor.publish" version "7.8.0"
+  id "dev.projektor.publish" version "8.0.0"
 }
 ```
 
@@ -103,7 +103,7 @@ Update: Coverage for the parsing module looking better now: https://projektorliv
 
 Kover is a recent code coverage tool from JetBrains for the Kotlin language: https://github.com/Kotlin/kotlinx-kover
 
-Starting in Projektor Gradle plugin `7.8.0` Projektor supports gathering and publishing reports
+Starting in Projektor Gradle plugin `7.8.2` Projektor supports gathering and publishing reports
 from the Kover plugin when it is configured to use the Jacoco engine.
 
 Projektor supports gathering Jacoco and Kover reports from different subprojects in a multi-project build.
@@ -115,7 +115,7 @@ Otherwise, you may get duplicate coverage reports in Projektor.
 
 Key for using Kover coverage with Projektor:
 
-* Use Projektor Gradle plugin `7.8.0` or higher
+* Use Projektor Gradle plugin `7.8.2` or higher
 * Configure Kover to use the Jacoco engine
 * Only have the Kover Gradle plugin in the project, don't add the Jacoco Gradle plugin as well
 
@@ -186,16 +186,17 @@ projektor {
 
 ## Compatibility
 
-| Plugin version | Server version | Java version |
-| -------------- | -------------- | ------------ |
-| 1.0.0 - 1.0.2  | 1.0.0+         | 8+           |
-| 1.0.3          | 1.0.6+         | 8+           |
-| 2.0.0          | 2.0.0+         | 8+           |
-| 3.0.0          | 2.0.0+         | 8+           |
-| 4.0.0          | 2.0.0+         | 11+          |
-| 5.0.0+         | 3.3.0+         | 11+          |
-| 5.1.0+         | 3.5.0+         | 11+          |
-| 7.0.0+         | 4.0.0+         | 11+          |
+| Plugin version | Java version | Gradle version | Projektor server version |
+| -------------- | ------------ | -------------- | ------------------------ |
+| 1.0.0 - 1.0.2  | 8+           | 5+             | 1.0.0+                   |
+| 1.0.3          | 8+           | 5+             | 1.0.6+                   |
+| 2.0.0          | 8+           | 5+             | 2.0.0+                   |
+| 3.0.0          | 8+           | 5+             | 2.0.0+                   |
+| 4.0.0          | 11+          | 5+             | 2.0.0+                   |
+| 5.0.0+         | 11+          | 5+             | 3.3.0+                   |
+| 5.1.0+         | 11+          | 5+             | 3.5.0+                   |
+| 7.0.0+         | 11+          | 5+             | 4.0.0+                   |
+| 8.0.0+         | 11+          | 7+             | 4.0.0+                   |
 
 ## Configure and apply via another plugin
 
@@ -204,7 +205,7 @@ of plugins used by each project. To apply the `ProjektorPublishPlugin` this way 
 
 ```groovy
 dependencies {
-  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:7.8.0"
+  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:8.0.0"
 }
 ```
 
@@ -213,9 +214,6 @@ class MyPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.repositories {
-            maven { url 'https://plugins.gradle.org/m2/' }
-        }
 
         project.plugins.apply(ProjektorPublishPlugin)
 
@@ -228,6 +226,8 @@ class MyPlugin implements Plugin<Project> {
 
 ## Changelog
 
+* 8.0.0
+  * **Breaking change:** Projektor Gradle plugin now requires Gradle 7+ 
 * 7.8.0
   * Adding support for Kover code coverage
 * 7.7.0
