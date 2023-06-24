@@ -19,7 +19,7 @@ To apply this plugin to your project:
 
 ```
 plugins {
-  id "dev.projektor.publish" version "8.0.0"
+  id "dev.projektor.publish" version "8.3.0"
 }
 ```
 
@@ -187,7 +187,7 @@ projektor {
 ## Compatibility
 
 | Plugin version | Java version | Gradle version | Projektor server version |
-| -------------- | ------------ | -------------- | ------------------------ |
+|----------------| ------------ |----------------| ------------------------ |
 | 1.0.0 - 1.0.2  | 8+           | 5+             | 1.0.0+                   |
 | 1.0.3          | 8+           | 5+             | 1.0.6+                   |
 | 2.0.0          | 8+           | 5+             | 2.0.0+                   |
@@ -197,6 +197,7 @@ projektor {
 | 5.1.0+         | 11+          | 5+             | 3.5.0+                   |
 | 7.0.0+         | 11+          | 5+             | 4.0.0+                   |
 | 8.0.0+         | 11+          | 7+             | 4.0.0+                   |
+| 8.3.0+         | 11+          | 7.6.1+         | 4.0.0+                   |
 
 ## Configure and apply via another plugin
 
@@ -205,7 +206,7 @@ of plugins used by each project. To apply the `ProjektorPublishPlugin` this way 
 
 ```groovy
 dependencies {
-  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:8.0.0"
+  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:8.3.0"
 }
 ```
 
@@ -226,6 +227,9 @@ class MyPlugin implements Plugin<Project> {
 
 ## Changelog
 
+* 8.3.0
+  * **Breaking change:** Projektor Gradle plugin now requires Gradle 7.6.1+
+  * Updating to Kotlin 1.8.22
 * 8.0.0
   * **Breaking change:** Projektor Gradle plugin now requires Gradle 7+ 
 * 7.8.0
