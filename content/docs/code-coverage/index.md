@@ -9,8 +9,9 @@ summary: Viewing code coverage stats and trends
 Projektor can visualize code coverage stats in your codebase, helping identify
 areas that need further testing. 
 Currently Projektor supports code coverage from 
-[Jacoco](https://docs.gradle.org/current/userguide/jacoco_plugin.html) and 
-[Jest](https://jestjs.io/docs/en/cli.html#--coverageboolean).
+[Jacoco](https://docs.gradle.org/current/userguide/jacoco_plugin.html), 
+[Jest](https://jestjs.io/docs/en/cli.html#--coverageboolean) and [Cobertura](https://cobertura.github.io/cobertura/).
+If your code coverage tool can output a coverage report in one of those formats, you're golden.
 
 Example Projektor reports with code coverage:
 
