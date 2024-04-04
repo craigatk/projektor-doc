@@ -322,4 +322,3 @@ Available in Projektor server versions >=4.38.0
   * Added repository flaky tests endpoint `GET /api/v1/repo/{org}/{repo}/tests/flaky`
 * Projektor server 4.35.0
   * Initial release of API with `GET /api/v1/repo/{org}/{repo}/coverage/current` and `GET /api/v1/org/{org}/coverage/current` endpoints
-  * 
