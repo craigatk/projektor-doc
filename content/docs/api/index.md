@@ -105,6 +105,64 @@ Available in Projektor server versions >=4.35.0
 }
 ```
 
+## Test runs
+
+### Repository test run summaries
+
+API endpoint to fetch summary information about the latest test runs in a repository.
+The test run summaries are from the most recent runs from the mainline branch in the repo.
+
+`GET /api/v1/repo/{org}/{repo}/tests/runs/summaries`
+
+Example URL: https://projektorlive.herokuapp.com/api/v1/repo/craigatk/projektor/tests/runs/summaries
+
+Available in Projektor server versions >=4.39.0
+
+#### Request query options
+
+| Query parameter | Default value | Description                           |
+|-----------------|---------------|---------------------------------------|
+| `limit`         | `10`          | How many test runs to fetch (max 100) |
+| `project`       | `null`        | Name of the project in the repo       |
+
+#### Response fields
+
+| Field name                   | Description                                                                                                                    |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| `id`                         | ID of the test run - can be viewed in the UI at `/tests/{id}`                                                                  |
+| `total_test_count`           | Number of total tests in the test run                                                                                          |
+| `total_passing_count`        | Number of passing tests in the test run                                                                                        |
+| `total_skipped_count`        | Number of skipped tests in the test run                                                                                        |
+| `total_failure_count`        | Number of failed tests in the test run                                                                                         |
+| `passed`                     | Whether the test run passed or failed                                                                                          |
+| `cumulative_duration`        | The sum of the duration of each individual test case. Can be longer than `wall_clock_duration` when tests are run in parallel. |
+| `wall_clock_duration`        | From when execution started to when it finished. Can be shorter than `cumulative_duration` when tests are run in parallel.     |
+| `average_duration`           | Cumulative duration / total test count                                                                                         |
+| `slowest_test_case_duration` | How long the slowest test in the run took to execute                                                                           |
+| `created_timestamp`          | When Projektor received the test run                                                                                           |
+
+#### Example response
+
+```json
+{
+    "test_runs": [
+        {
+            "id": "0ECXKVBHPSPF",
+            "total_test_count": 271,
+            "total_passing_count": 270,
+            "total_skipped_count": 1,
+            "total_failure_count": 0,
+            "passed": true,
+            "cumulative_duration": 72.308,
+            "average_duration": 0.267,
+            "slowest_test_case_duration": 4.749,
+            "wall_clock_duration": 161.865,
+            "created_timestamp": "2024-04-08T10:55:42.731Z"
+        }
+    ]
+}
+```
+
 ## Flaky tests
 
 ### Repository flaky tests
@@ -318,6 +376,8 @@ Available in Projektor server versions >=4.38.0
 
 ## Changelog
 
+* Projektor server 4.39.0
+  * Added repository test run summaries endpoint `GET /api/v1/repo/{org}/{repo}/tests/runs/summaries`
 * Projektor server 4.38.0
   * Added repository flaky tests endpoint `GET /api/v1/repo/{org}/{repo}/tests/flaky`
 * Projektor server 4.35.0
