@@ -25,6 +25,15 @@ The bare minimum set of configuration to start Projektor is the database URL, us
 
 Then to start the server, simply run `java -jar projektor-server-<version>.jar`
 
+### Java 17 troubleshooting
+
+If you encounter `InaccessibleObjectException` exceptions when running with Java 17, add params
+`--add-opens=java.base/sun.net.www.protocol.https=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED` to the `java` execution:
+
+`java --add-opens=java.base/sun.net.www.protocol.https=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED -jar projektor-server-<version>.jar`
+
+The library that Projektor users for posting comments to GitHub PRs contains reflection code that can be impacted by running Java 17+.
+
 ## Database configuration
 
 Projektor stores the parsed test results in a Postgres database.
