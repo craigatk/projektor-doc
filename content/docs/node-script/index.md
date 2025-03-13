@@ -185,6 +185,20 @@ For example:
 
 ## Changelog
 
+* 3.12.5
+  * Dependency updates, including axios 1.8.3
+* 3.12.4
+  * Updating to axios 1.7.5
+* 3.12.3
+  * Upgrading braces dependency
+* 3.12.2
+  * Updating version of follow-redirects to 1.15.4
+* 3.12.1
+  * Adding verbose logging option
+* 3.12.0
+  * Updating dependencies
+* 3.11.0
+  * Updating dependencies
 * 3.10.0
   *  Can publish code coverage results by themselves without any test results files
 * 3.9.0
