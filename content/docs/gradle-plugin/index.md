@@ -19,7 +19,7 @@ To apply this plugin to your project:
 
 ```
 plugins {
-  id "dev.projektor.publish" version "9.0.0"
+  id "dev.projektor.publish" version "10.0.0"
 }
 ```
 
@@ -199,6 +199,7 @@ projektor {
 | 8.0.0+         | 11+          | 7+             | 4.0.0+                   |
 | 8.3.0+         | 11+          | 7.6.1+         | 4.0.0+                   |
 | 9.0.0+         | 17+          | 7.6.1+         | 4.0.0+                   |
+| 10.0.0+        | 21+          | 8.4+           | 4.0.0+                   |
 
 ## Configure and apply via another plugin
 
@@ -207,7 +208,7 @@ of plugins used by each project. To apply the `ProjektorPublishPlugin` this way 
 
 ```groovy
 dependencies {
-  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:9.0.0"
+  api "dev.projektor.publish:dev.projektor.publish.gradle.plugin:10.0.0"
 }
 ```
 
@@ -228,6 +229,10 @@ class MyPlugin implements Plugin<Project> {
 
 ## Changelog
 
+* 10.0.0
+  * **Breaking change:** Gradle plugin now requires Java 21+
+  * **Breaking change:** Gradle plugin now requires Gradle 8.4+
+  * **Breaking change:** If using Kover for code coverage, minimum Kover supported version is 0.7.1+
 * 9.0.0
   * **Breaking change:** Projektor Gradle plugin now requires Java 17+
 * 8.7.0
