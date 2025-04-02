@@ -46,9 +46,6 @@ summaryLength = 30
     meta_og_url = "https://projektor.dev"
     meta_og_image = "images/home/projektor-results-dashboard.png"
     meta_og_description = "Projektor is a convenient way to view full test results from continuous integration (CI) servers"
-    meta_twitter_card = "summary"
-    meta_twitter_site = "@atk.craig1"
-    meta_twitter_creator = "@atk.craig1"
 
   [params.logo]
       mobile = "/images/projektor-logo.png"
