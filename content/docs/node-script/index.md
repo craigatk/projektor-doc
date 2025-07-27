@@ -184,7 +184,8 @@ For example:
 ** _Required_
 
 ## Changelog
-
+* 3.13.0
+  * Dependency updates, including axios 1.11.0
 * 3.12.5
   * Dependency updates, including axios 1.8.3
 * 3.12.4
