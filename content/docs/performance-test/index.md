@@ -17,13 +17,13 @@ for individual test runs and over time.
 
 ### Individual performance test run
 
-You can view the performance results stats for a [specific performance test run](https://projektorlive.herokuapp.com/tests/F7JKK2XJSQ2P).
+You can view the performance results stats for a specific performance test run.
 
 ![Performance results individual](/images/performance-test/projektor-performance-single.png "Performance results individual")
 
 ### Performance results over time
 
-And you can see [performance over time](https://projektorlive.herokuapp.com/repository/craigatk/projektor/performance) for each performance test run in a Git repository.
+And you can see performance over time for each performance test run in a Git repository.
 
 ![Performance results graph](/images/performance-test/projektor-performance-graph.png "Performance results graph")
 
