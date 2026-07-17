@@ -184,6 +184,22 @@ For example:
 ** _Required_
 
 ## Changelog
+* 3.13.13
+  * Upgrading to Axios 1.16.1
+* 3.13.12
+  * Upgrading Node script to axios 1.15.0
+* 3.13.11
+  * Upgrading dependencies, including lodash 4.18.1
+* 3.13.10
+  * Upgrading minimatch
+* 3.13.9
+  * Updating dependencies
+* 3.13.8
+  * Upgrading lodash to 4.17.23
+* 3.13.2
+  * Dependency updates, including glob 12
+* 3.13.1
+  * Updating node publisher to axios 1.12
 * 3.13.0
   * Dependency updates, including axios 1.11.0
 * 3.12.5

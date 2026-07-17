@@ -13,10 +13,10 @@ Currently Projektor supports code coverage from
 [Jest](https://jestjs.io/docs/en/cli.html#--coverageboolean) and [Cobertura](https://cobertura.github.io/cobertura/).
 If your code coverage tool can output a coverage report in one of those formats, you're golden.
 
-Example Projektor reports with code coverage:
+Example Projektor report with code coverage:
 
-* [Jacoco code coverage](https://projektorlive.herokuapp.com/tests/DELWE3XYEXJK/coverage)
-* [Jest code coverage](https://projektorlive.herokuapp.com/tests/5NSUCYQV4MWS/coverage)
+* [Jacoco code coverage](https://live.projektor.dev/tests/AYAM6TSB8DIS/coverage)
+* [Jest code coverage](https://live.projektor.dev/tests/6M7RSLUA9UKC/coverage/All%20files/files)
 
 Instructions for enabling code coverage with each publisher:
 
@@ -41,7 +41,7 @@ View the code coverage over time in a given Git repository:
 
 ![Repository coverage timeline](/images/code-coverage/repo-coverage-timeline.png "Repository coverage timeline")
 
-[Repository code coverage timeline example](https://projektorlive.herokuapp.com/repository/craigatk/projektor/coverage)
+[Repository code coverage timeline example](https://live.projektor.dev/repository/craigatk/projektor/coverage)
 
 ## Organization coverage
 
@@ -50,4 +50,4 @@ to identify areas to focus on:
 
 ![Organization code coverage](/images/code-coverage/org-coverage.png "Organization code coverage")
 
-[Organization code coverage example](https://projektorlive.herokuapp.com/organization/craigatk/coverage)
+[Organization code coverage example](https://live.projektor.dev/organization/craigatk/coverage)

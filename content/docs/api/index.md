@@ -23,7 +23,7 @@ API endpoint to get the code coverage percentage for a given repository:
 
 `GET /api/v1/repo/{org}/{repo}/coverage/current`
 
-Example URL: https://projektorlive.herokuapp.com/api/v1/repo/craigatk/projektor/coverage/current
+Example URL: https://live.projektor.dev/api/v1/repo/craigatk/projektor/coverage/current
 
 Available in Projektor server versions >=4.35.0
 
@@ -57,7 +57,7 @@ API endpoint to get the code coverage percentage for all repos in a Git organiza
 
 `GET /api/v1/org/{org}/coverage/current`
 
-Example URL: https://projektorlive.herokuapp.com/api/v1/org/craigatk/coverage/current
+Example URL: https://live.projektor.dev/api/v1/org/craigatk/coverage/current
 
 Available in Projektor server versions >=4.35.0
 
@@ -114,7 +114,7 @@ The test run summaries are from the most recent runs from the mainline branch in
 
 `GET /api/v1/repo/{org}/{repo}/tests/runs/summaries`
 
-Example URL: https://projektorlive.herokuapp.com/api/v1/repo/craigatk/projektor/tests/runs/summaries
+Example URL: https://live.projektor.dev/api/v1/repo/craigatk/projektor/tests/runs/summaries
 
 Available in Projektor server versions >=4.39.0
 
