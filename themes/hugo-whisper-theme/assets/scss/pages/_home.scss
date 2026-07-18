@@ -4,6 +4,9 @@
     font-weight: lighter;
     font-family: $font-family-base;
   }
+  .content a {
+    text-decoration: none;
+  }
   p {
     margin: 0 auto;
     font-size: 1.2rem;
