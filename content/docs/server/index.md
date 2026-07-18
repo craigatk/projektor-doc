@@ -9,6 +9,7 @@ summary: Configuring and running the Projektor server
 ## Requirements
 
 * [Projektor server .jar file from releases page](https://github.com/craigatk/projektor/releases)
+* Java 21+ for Projektor server v6.x.x
 * Java 17+ for Projektor server v5.x.x
 * Java 11+ for Projektor server v4.x.x
 * Postgres
@@ -25,9 +26,17 @@ The bare minimum set of configuration to start Projektor is the database URL, us
 
 Then to start the server, simply run `java -jar projektor-server-<version>.jar`
 
-### Java 17 troubleshooting
+### Port
 
-If you encounter `InaccessibleObjectException` exceptions when running with Java 17, add params
+The server listens on port `8080` by default. To use a different port, set:
+
+```
+PORT=<port for the server to listen on>
+```
+
+### Java 17+ troubleshooting
+
+If you encounter `InaccessibleObjectException` exceptions when running with Java 17+, add params
 `--add-opens=java.base/sun.net.www.protocol.https=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED` to the `java` execution:
 
 `java --add-opens=java.base/sun.net.www.protocol.https=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED -jar projektor-server-<version>.jar`
@@ -53,10 +62,33 @@ DB_PASSWORD=testpass
 DB_URL=jdbc:postgresql://localhost:5432/projektordb
 ```
 
+`DATABASE_URL` is also accepted as an alternative to `DB_URL`, for hosts that provide connection
+info as a `postgres://user:password@host:port/database` URI rather than a `jdbc:postgresql://`
+URL — it's converted automatically. If both are set, `DB_URL` takes precedence.
+
+You can also configure the maximum number of pooled database connections (default `10`):
+
+```
+DB_MAX_POOL_SIZE=<optional - maximum number of pooled database connections>
+```
+
 ### Schema
 
 You can optionally set the database schema to use by setting the `DB_SCHEMA` environment variable.
 If that is not set, the server will default to the `public` schema.
+
+## Authentication
+
+By default the Projektor server accepts publishing requests (test results, code coverage,
+attachments) from anyone who can reach it. To require a token on those requests, set:
+
+```
+PUBLISH_TOKEN=<a secret token of your choosing>
+```
+
+When set, publishing requests must send that same value in the `X-PROJEKTOR-TOKEN` header or they'll
+be rejected — configure the Gradle plugin, Node script, or GitHub Action with the same token. If
+`PUBLISH_TOKEN` isn't set, authentication is disabled and any request is accepted.
 
 ## Attachment object store configuration
 
@@ -75,6 +107,15 @@ There are also a couple more optional parameters you can specify:
 ```
 ATTACHMENT_AUTO_CREATE_BUCKET=< true to automatically create the bucket on startup if it does not exist >
 ATTACHMENT_MAX_SIZE_MB=< attachments above this max size in MB will be rejected >
+```
+
+## Payload size limit
+
+The Projektor server rejects incoming test result payloads larger than a configurable size,
+defaulting to 50,000,000 bytes (50MB):
+
+```
+MAX_PAYLOAD_SIZE=<optional - max size in bytes of an incoming test results payload, defaults to 50000000>
 ```
 
 ## Metrics
@@ -117,18 +158,18 @@ ktor server metrics as well as a few custom metrics:
 
 The list of metrics is also in the server codebase in `MetricsService.kt`
 
-### Database cleanup
+## Database cleanup
 
 To keep the database size manageable, Projektor has a scheduled job that runs once a day 
 and cleans up test runs and attachments that are older than a specified number of days:
 
 ```
 MAX_REPORT_AGE_DAYS=<test runs created more than X days will be deleted>
-MAX_ATTACHMENT_AGE_DAYS<attachments created more than X days ago will be deleted>
-CLEANUP_DRY_RUN<optional - set to true to just log the number of reports that would be cleaned up and not actually delete them>
+MAX_ATTACHMENT_AGE_DAYS=<attachments created more than X days ago will be deleted>
+CLEANUP_DRY_RUN=<optional - set to true to just log the number of reports that would be cleaned up and not actually delete them>
 ```
 
-### Messages
+## Messages
 
 It can be helpful to display a message to all users in the Projektor UI if
 you want to notify them of upcoming changes, etc. To do that, set this
@@ -138,7 +179,7 @@ environment variable:
 GLOBAL_MESSAGES=<Messages to display to all users in the Projektor UI. If you want to show multiple messages, use a pipe | to separate them. > 
 ```
 
-### GitHub links
+## GitHub links
 
 Projektor can link directly to files in the GitHub UI, for example linking to uncovered or partial lines
 on the code coverage page. To enable that linking capability, you'll need to set the
@@ -148,7 +189,7 @@ base URL for GitHub (either public GitHub or a GitHub enterprise instance):
 GITHUB_BASE_URL=<base URL of the GitHub instance, for example https://github.com for public GitHub>
 ```
 
-### GitHub pull request comments
+## GitHub pull request comments
 
 Projektor can [comment on pull requests](../github-pull-request) with direct links to the Projektor
 report, test pass/fail counts, code coverage stats, etc. To help configure that capability, set the following
@@ -158,7 +199,25 @@ environment variables:
 SERVER_BASE_URL=<base URL of the Projektor server>
 GITHUB_API_URL=<base URL of the GitHub API, either the public GitHub API or a GitHub Enterprise instance. For example, for public GitHub use https://api.github.com
 GITHUB_APP_ID=<GitHub app ID for the Projektor GitHub app instance>
-GITHUB_PRIVATE_KEY<Base64-encoded private key for the Projektor GitHub app>
+GITHUB_PRIVATE_KEY=<Base64-encoded private key for the Projektor GitHub app>
+```
+
+## AI test failure analysis
+
+Projektor can [analyze test failures with ChatGPT's help](/docs/ai/). To enable it, set a
+base64-encoded OpenAI API key:
+
+```
+OPENAI_API_KEY=<base64-encoded OpenAI API key>
+```
+
+## Logging
+
+By default the server logs plain text to the console. To switch to JSON (Logstash-formatted)
+console logging instead, set:
+
+```
+JSON_LOGGER=<optional - any non-empty value enables JSON console logging>
 ```
 
 ## Troubleshooting

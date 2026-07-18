@@ -46,7 +46,3 @@ To help you make your test suite faster, Projektor also shows the slowest 10 tes
 which tests to focus on to speed up your overall test run:
 
 https://live.projektor.dev/tests/AYAM6TSB8DIS/slow
-
-## Architecture
-
-![Projektor architecture](/images/introduction/Projektor-architecture.png "Projektor architecture")
