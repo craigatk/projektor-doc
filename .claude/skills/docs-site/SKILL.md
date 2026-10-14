@@ -78,6 +78,7 @@ referenced with an absolute path plus title text:
 | Full build (catches template/content errors) | `hugo` |
 
 `public/` and `resources/_gen` are gitignored build output — don't commit them. Netlify builds
-with `HUGO_VERSION = "0.69.2"` (pinned in `netlify.toml`); if a local `hugo` is a much newer
-major version, layout behavior can drift from what actually deploys, so treat unexpected local
-build warnings with that in mind.
+with `HUGO_VERSION = "0.168.0"` (pinned in `netlify.toml`). Templates use `hugo.IsServer`, so a
+local `hugo` older than 0.120 won't build the site; if your local version differs a lot from the
+pinned one, layout behavior can drift from what actually deploys, so treat unexpected local build
+warnings with that in mind.

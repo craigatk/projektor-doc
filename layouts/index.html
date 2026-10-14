@@ -1,7 +1,7 @@
 {{ define "title" }}{{ .Site.Title }}{{ end}}
 {{ define "header_css" }}
 {{ $home := resources.Get "css/home.css" }}
-{{ if .Site.IsServer }}
+{{ if hugo.IsServer }}
 <link rel="stylesheet" href="{{ $home.RelPermalink }}">
 {{ else }}
 <link rel="stylesheet" href="{{ ($home | minify | fingerprint).RelPermalink }}">
