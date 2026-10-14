@@ -2,7 +2,7 @@
 title: 'Slack notifications'
 date: 2026-10-14T19:30:08+10:00
 draft: false
-weight: 6
+weight: 8
 summary: Get notified in Slack when your mainline build goes red, coverage drops, or a test becomes flaky
 ---
 

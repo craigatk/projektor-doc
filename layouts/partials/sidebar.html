@@ -1,0 +1,12 @@
+{{ $currentID := "" }}
+{{ with .File }}{{ $currentID = .UniqueID }}{{ end }}
+<nav class="docs-menu">
+  <h4>{{ .Section | humanize }}</h4>
+  <ul>
+    {{ range (where .Site.RegularPages "Section" .Section) }}
+    <li class="{{ if eq .File.UniqueID $currentID }}active {{ end }}">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+    {{ end }}
+  </ul>
+</nav>

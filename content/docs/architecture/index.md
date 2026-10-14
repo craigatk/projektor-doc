@@ -2,7 +2,7 @@
 title: 'Architecture'
 date: 2026-07-18T19:30:08+10:00
 draft: false
-weight: 13
+weight: 14
 summary: How Projektor's components fit together
 ---
 

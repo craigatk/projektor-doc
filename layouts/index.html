@@ -1,0 +1,103 @@
+{{ define "title" }}{{ .Site.Title }}{{ end}}
+{{ define "header_css" }}
+{{ $home := resources.Get "css/home.css" }}
+{{ if hugo.IsServer }}
+<link rel="stylesheet" href="{{ $home.RelPermalink }}">
+{{ else }}
+<link rel="stylesheet" href="{{ ($home | minify | fingerprint).RelPermalink }}">
+{{ end }}
+{{ end }}
+{{ define "body_classes" }}page-home{{ end }}
+{{ define "header_classes" }}{{ end }}
+
+{{ define "meta_tags" }}
+<meta name="description" content="{{ .Site.Params.homepage_meta_tags.meta_description }}" />
+<meta property="og:title" content="{{ .Site.Params.homepage_meta_tags.meta_og_title }}" />
+<meta property="og:type" content="{{ .Site.Params.homepage_meta_tags.meta_og_type }}" />
+<meta property="og:url" content="{{ .Site.Params.homepage_meta_tags.meta_og_url }}" />
+<meta property="og:image" content="{{ .Site.Params.homepage_meta_tags.meta_og_image }}" />
+<meta property="og:description" content="{{ .Site.Params.homepage_meta_tags.meta_og_description }}" />
+<meta name="twitter:card" content="{{ .Site.Params.homepage_meta_tags.meta_twitter_card }}" />
+<meta name="twitter:site" content="{{ .Site.Params.homepage_meta_tags.meta_twitter_site }}" />
+<meta name="twitter:creator" content="{{ .Site.Params.homepage_meta_tags.meta_twitter_creator }}" />
+{{ end }}
+
+{{ define "main" }}
+<section class="home-hero">
+  <div class="home-container">
+    {{ with .Params.eyebrow }}<p class="home-eyebrow">{{ . }}</p>{{ end }}
+    <h1 class="home-headline">{{ .Params.headline | default .Title }}</h1>
+    <div class="home-lede">{{ .Content }}</div>
+    <div class="home-actions">
+      <a class="home-btn home-btn-primary" href="{{ .Site.Params.homepage_button_link | relURL }}">
+        {{ .Site.Params.homepage_button_text }}
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="home-btn home-btn-secondary" href="https://github.com/craigatk/projektor">View on GitHub</a>
+    </div>
+    <p class="home-works-with">
+      Works with JUnit XML, Jest, and more &mdash; publish results with the
+      <a href="{{ "docs/gradle-plugin/" | relURL }}">Gradle plugin</a> or
+      <a href="{{ "docs/node-script/" | relURL }}">Node script</a>.
+    </p>
+  </div>
+
+  {{ with index .Params.showcase 0 }}
+  <div class="home-container home-hero-shot">
+    <div class="home-window">
+      <div class="home-window-bar"><span></span><span></span><span></span></div>
+      <img src="{{ .image | relURL }}" alt="{{ .title }}" />
+    </div>
+  </div>
+  {{ end }}
+</section>
+
+{{ with .Params.features }}
+<section class="home-section">
+  <div class="home-container">
+    <h2 class="home-section-title">Everything about your test runs, in one place</h2>
+    <div class="home-features">
+      {{ range . }}
+      <a class="home-feature" href="{{ .link | relURL }}">
+        <span class="home-feature-icon">{{ partial "home-icon.html" .icon }}</span>
+        <h3>{{ .title }}</h3>
+        <p>{{ .text }}</p>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ with .Params.showcase }}
+<section class="home-section home-section-tinted">
+  <div class="home-container">
+    {{ range after 1 . }}
+    <div class="home-showcase">
+      <div class="home-showcase-text">
+        <h2>{{ .title }}</h2>
+        <p>{{ .text }}</p>
+      </div>
+      <div class="home-window">
+        <div class="home-window-bar"><span></span><span></span><span></span></div>
+        <img src="{{ .image | relURL }}" alt="{{ .title }}" loading="lazy" />
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+<section class="home-section home-cta">
+  <div class="home-container">
+    <h2>Start browsing your test results in minutes</h2>
+    <p>Set up the Projektor server, then publish results from your CI build.</p>
+    <div class="home-actions">
+      <a class="home-btn home-btn-primary" href="{{ "docs/getting-started/" | relURL }}">Get started <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ define "footer_js" }}
+{{ end }}
