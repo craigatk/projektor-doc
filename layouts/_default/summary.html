@@ -1,0 +1,7 @@
+<a class="docs-card" href="{{ .Permalink }}">
+  {{ if .Params.image }}
+  <img alt="{{ .Title }}" src="{{ .Params.image }}" />
+  {{ end}}
+  <h2>{{ .Title }}</h2>
+  <p>{{ .Summary }}</p>
+</a>

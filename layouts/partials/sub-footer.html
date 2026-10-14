@@ -1,0 +1,13 @@
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span class="site-footer-brand">
+      <img alt="" src="{{ .Site.Params.logo.standard | relURL }}" width="22" height="22" />
+      {{ .Site.Title }}
+    </span>
+    <nav class="site-footer-links">
+      {{ range .Site.Menus.main }}
+      <a href="{{ .URL }}">{{ .Name }}</a>
+      {{ end }}
+    </nav>
+  </div>
+</footer>
