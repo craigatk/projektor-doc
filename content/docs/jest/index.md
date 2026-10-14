@@ -2,7 +2,7 @@
 title: 'Jest tests'
 date: 2021-02-08T19:30:08+10:00
 draft: false
-weight: 9
+weight: 10
 summary: Configuring Jest tests to write results for Projektor 
 ---
 

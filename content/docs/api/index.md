@@ -2,7 +2,7 @@
 title: 'API'
 date: 2023-03-29T19:30:08+10:00
 draft: false
-weight: 10
+weight: 11
 summary: Programmatically access Projektor data via a REST API
 ---
 
