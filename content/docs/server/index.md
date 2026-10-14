@@ -202,6 +202,20 @@ GITHUB_APP_ID=<GitHub app ID for the Projektor GitHub app instance>
 GITHUB_PRIVATE_KEY=<Base64-encoded private key for the Projektor GitHub app>
 ```
 
+## Slack notifications
+
+Projektor can [post Slack notifications](/docs/slack-notification/) (alpha) when a mainline build goes red,
+drops code coverage, or makes a test flaky. To enable them, set the following environment variables:
+
+```
+SERVER_BASE_URL=<base URL of the Projektor server>
+SLACK_API_URL=<base URL of the Slack Web API, https://slack.com/api>
+SLACK_BOT_TOKEN=<bot token of the Projektor Slack app, xoxb-...>
+SLACK_COVERAGE_DROP_THRESHOLD=<optional - minimum drop in line coverage percentage points to notify about, defaults to 0.1>
+SLACK_FLAKY_MAX_RUNS=<optional - number of recent mainline builds to check for flaky tests, defaults to 50>
+SLACK_FLAKY_FAILURE_THRESHOLD=<optional - number of failures in those builds for a test to be flaky, defaults to 5>
+```
+
 ## AI test failure analysis
 
 Projektor can [analyze test failures with ChatGPT's help](/docs/ai/). To enable it, set a

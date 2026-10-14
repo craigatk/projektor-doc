@@ -148,6 +148,9 @@ For example:
 
 `yarn projektor-publish --serverUrl=<url> --writeSlackMessageFile --projectName=<project-name> ui/test-results/*.xml`
 
+To have the Projektor server post to Slack for you when your mainline build goes red, coverage drops,
+or a test becomes flaky, see [Slack notifications](/docs/slack-notification/).
+
 ### Code quality reports
 
 Starting with Node script `3.9.0`,
@@ -184,6 +187,10 @@ For example:
 ** _Required_
 
 ## Changelog
+* 3.13.15
+  * Upgrading to brace-expansion 5.0.8
+* 3.13.14
+  * Upgrading to Axios 1.18.1 and updating dependencies
 * 3.13.13
   * Upgrading to Axios 1.16.1
 * 3.13.12
