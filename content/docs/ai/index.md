@@ -7,8 +7,8 @@ summary: AI test failure analysis
 ---
 
 Fix your failing tests faster by getting hints as to the cause of your failing tests with AI assistance.
-Projektor supports analyzing test failures with ChatGPT's help to give insights into possible causes of the test
-failure.
+Projektor supports analyzing test failures with OpenAI's ChatGPT or Anthropic's Claude to give insights into possible
+causes of the test failure.
 
 ## Test failure analysis
 
@@ -78,9 +78,33 @@ This analysis yields some helpful hints, such as:
 
 ## Configuration
 
+Projektor can use either OpenAI or Anthropic for test failure analysis. API keys are base64-encoded.
+
+### OpenAI
+
 AI test failure analysis with ChatGPT is available in Projektor server v5.2.0+ with the following environment variable set
 to your OpenAI API key:
 
 ```
-OPENAI_API_KEY=<your_openai_api_key>
+OPENAI_API_KEY=<base64-encoded OpenAI API key>
 ```
+
+### Anthropic Claude
+
+AI test failure analysis with Claude is available in Projektor server v6.5.0+ with the following environment variables:
+
+```
+AI_PROVIDER=anthropic
+ANTHROPIC_API_KEY=<base64-encoded Anthropic API key>
+ANTHROPIC_MODEL=<optional - Claude model ID to use, defaults to claude-opus-5-5>
+```
+
+For example, set `ANTHROPIC_MODEL=claude-haiku-4-5` for a faster, lower-cost model.
+
+### Choosing a provider
+
+`AI_PROVIDER` can be `openai` or `anthropic`.
+
+* If `AI_PROVIDER` is set, Projektor uses that provider. If that provider's API key isn't set, test failure analysis
+  is disabled - Projektor won't fall back to the other provider.
+* If `AI_PROVIDER` isn't set, Projektor uses whichever provider has an API key set. If both keys are set, it uses OpenAI.
