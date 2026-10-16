@@ -218,12 +218,17 @@ SLACK_FLAKY_FAILURE_THRESHOLD=<optional - number of failures in those builds for
 
 ## AI test failure analysis
 
-Projektor can [analyze test failures with ChatGPT's help](/docs/ai/). To enable it, set a
-base64-encoded OpenAI API key:
+Projektor can [analyze test failures with OpenAI's ChatGPT or Anthropic's Claude](/docs/ai/). To enable it, set a
+base64-encoded API key for at least one provider:
 
 ```
+AI_PROVIDER=<optional - openai or anthropic. Defaults to whichever provider has an API key, preferring OpenAI>
 OPENAI_API_KEY=<base64-encoded OpenAI API key>
+ANTHROPIC_API_KEY=<base64-encoded Anthropic API key>
+ANTHROPIC_MODEL=<optional - Claude model ID to use, defaults to claude-opus-5-5>
 ```
+
+See [AI test failure analysis](/docs/ai/#configuration) for how the provider is chosen.
 
 ## Logging
 
