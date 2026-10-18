@@ -2,7 +2,8 @@
 title: 'Code quality'
 date: 2021-10-11T19:30:08+10:00
 draft: false
-weight: 9
+weight: 12
+group: 'Features'
 summary: View code quality reports in Projektor
 ---
 

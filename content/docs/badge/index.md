@@ -2,7 +2,8 @@
 title: 'Readme badges'
 date: 2021-01-02T19:30:08+10:00
 draft: false
-weight: 7
+weight: 8
+group: 'Features'
 summary: Badge for project readme with code coverage stats
 ---
 

@@ -2,7 +2,8 @@
 title: 'Node script'
 date: 2020-05-02T19:30:08+10:00
 draft: false
-weight: 12
+weight: 15
+group: 'Publishing results'
 summary: Node script for publishing Javascript results to Projektor
 ---
 
@@ -46,14 +47,29 @@ You can also customize the name of the config file by passing the `--configFile=
 
 `yarn projektor-publish --configFile=projektor.cypress.json`
 
+When the config file exists, the Node script uses only the settings in the config file and ignores the
+other command-line parameters, so put all your settings in one place or the other.
+
+## Publish token
+
+If your Projektor server [requires a publish token](/docs/server/#authentication), set the
+`PROJEKTOR_TOKEN` environment variable to the token when running the Node script, for example from a
+CI secret:
+
+`PROJEKTOR_TOKEN=<token> yarn projektor-publish --serverUrl=<url> ui/test-results/*.xml`
+
+The token can't be set in the config file or as a command-line parameter, which keeps it out of
+your committed configuration and your CI logs.
+
 ## Code coverage
 
 Projektor can show code coverage stats alongside test results.
 
 ![Projektor Jest code coverage](/images/jest-coverage.png "Projektor Jest code coverage")
 
-Starting with version `2.7.0` you can specify the paths to the Jest coverage XML files
-in the `coverage` parameter.
+Starting with version `2.7.0` you can specify the paths to your coverage report files
+in the `coverage` parameter. See the [code coverage page](/docs/code-coverage/) for the supported formats -
+for Jest, that's the `clover.xml` file written to the coverage directory.
 
 For example, in the config file:
 
@@ -72,6 +88,11 @@ For example, in the config file:
 Or on the command line:
 
 `yarn projektor-publish --serverUrl=<projektor_url> --coverage="ui/coverage/*.xml" ui/test-results/*.xml`
+
+If the file paths in your coverage reports don't line up with the paths in your Git repository
+(for example, if the project is in a subdirectory of the repository), set `baseDirectoryPath` to
+the project's directory relative to the repository root, e.g. `"baseDirectoryPath": "ui"`.
+Projektor uses that to link files on the coverage page to the right files in GitHub.
 
 ## Attachments
 
@@ -142,16 +163,16 @@ message in a JSON file. This Slack message includes a direct link to the Projekt
 so users can quickly investigate test failures.
 
 To use it, set the `writeSlackMessageFile` parameter and set the `slackProjectName` parameter to the name of your
-project - it is included in the Slack message.
+project - it is included in the Slack message. (If `slackProjectName` isn't set, the `projectName` parameter is used instead.)
 
 For example:
 
-`yarn projektor-publish --serverUrl=<url> --writeSlackMessageFile --projectName=<project-name> ui/test-results/*.xml`
+`yarn projektor-publish --serverUrl=<url> --writeSlackMessageFile --slackProjectName=<project-name> ui/test-results/*.xml`
 
 To have the Projektor server post to Slack for you when your mainline build goes red, coverage drops,
 or a test becomes flaky, see [Slack notifications](/docs/slack-notification/).
 
-### Code quality reports
+## Code quality reports
 
 Starting with Node script `3.9.0`,
 Projektor supports any and all code quality tools (linting, static analysis, etc.) that can output their results in text files.
@@ -183,8 +204,14 @@ For example:
 | resultsMaxSizeMB      | `string`         | `20`                             | Max size of the combined test results payload, in MB. Uploading the results will fail if the combined test results payload exceeds this size. |
 | attachmentMaxSizeMB   | `string`         | `20`                             | Max size of individual attachments, in MB. Uploading an individual attachment will fail if the attachment exceeds this size. |
 | gitMainBranchNames    | `string`         | `main,master`                    | Comma-separated list of the mainline branches for this repo. Mainline branches are used when calculating things like current code coverage for the repo. |
+| baseDirectoryPath     | `string`         | `null`                           | Directory of the project relative to the root of the Git repository, used to match file paths in coverage reports to files in the repository |
+| groupResults          | `boolean`        | `false`                          | Combine results published from the same CI build (by build number) into a single Projektor report, for example when tests run in several steps or parallel jobs. Requires the `GITHUB_RUN_NUMBER` or `VELA_BUILD_NUMBER` environment variable. |
+| compressionEnabled    | `boolean`        | `true`                           | Whether to compress the test results with GZIP when sending them to the server. Set this in the config file. |
+| verbose               | `boolean`        | `false`                          | Log extra detail, such as the full stack trace when publishing fails |
 
 ** _Required_
+
+The publish token isn't a config parameter - set it with the `PROJEKTOR_TOKEN` environment variable, see [Publish token](#publish-token).
 
 ## Changelog
 * 3.13.15

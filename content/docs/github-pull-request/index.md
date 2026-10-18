@@ -2,7 +2,8 @@
 title: 'GitHub PR comments'
 date: 2021-01-02T19:30:08+10:00
 draft: false
-weight: 6
+weight: 7
+group: 'Features'
 summary: Quickly access Projektor reports through automatic GitHub pull request comments
 ---
 

@@ -3,6 +3,7 @@ title: 'Performance tests'
 date: 2020-11-15T19:30:08+10:00
 draft: false
 weight: 4
+group: 'Features'
 summary: View performance test results with Projektor, both individual test runs and performance graphed over time
 ---
 

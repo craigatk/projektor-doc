@@ -2,8 +2,9 @@
 title: 'AI test failure analysis'
 date: 2025-03-05T19:30:08+10:00
 draft: false
-weight: 7
-summary: AI test failure analysis
+weight: 10
+group: 'Features'
+summary: Get AI-generated hints on why a test failed, using OpenAI or Anthropic Claude
 ---
 
 Fix your failing tests faster by getting hints as to the cause of your failing tests with AI assistance.
@@ -24,9 +25,15 @@ Clicking the "Analyze Failure" button will analyze the test failure:
 
 ![Failing Cypress test](/images/ai/cypress-failing-test-ai.png "Failing Cypress test")
 
-And yield an analysis such as this:
+The analysis suggests possible causes of the failure and next steps to try. For this failure, it included
+hints such as:
 
-```
+* Adding `cy.debug()` or `cy.log()` to get more detailed information about the failure
+* Adding a longer timeout for the specific element to appear
+* Adding a wait, while calling out that a static wait time isn't a great idea - wait for a condition instead
+
+{{< details summary="Full example analysis" >}}
+```text
 The error message you're encountering indicates that a test in a Cypress-based test suite has failed due to a timeout when trying to find an element with the specified selector `[role="dot-duration-8UNFGPZIGCHD"]`. Here are some possible reasons why this test may have failed and some suggestions for troubleshooting:
 
 1. **Element Not Present**:
@@ -66,15 +73,22 @@ cy.wait(2000); // For demonstration, not a best practice. Prefer to wait for spe
 
 By investigating these areas, you should be able to identify why the test failed and take the necessary steps to correct it.
 ```
+{{< /details >}}
 
 While AI can't immediately solve all of your failing tests for you, it can help with ideas on next steps.
 
-This analysis yields some helpful hints, such as:
+When several tests fail from the same root cause, you can also analyze the whole group at once with the
+"Analyze Root Cause" button on the [failure clustering](/docs/test-insights/#failure-clustering) summary.
 
-* Recommending adding `cy.debug()` or `cy.log()` to get more detailed information about the failure
-* Recommended adding a longer timeout for the specific element to appear
-* Recommended adding a wait, but also called out a static wait time isn't a great idea - wait for a condition instead
-* And more!
+## Using your own AI assistant
+
+Each failing test also has an "AI Context" tab (Projektor server >=6.2.0) with the failure's details
+formatted as Markdown - test name, file, failure message, and stack trace. Click "Copy Markdown for AI" to
+paste it into the AI assistant of your choice. This works even if AI test failure analysis isn't
+configured on your Projektor server.
+
+To let an AI coding assistant like Claude Code fetch failure details from Projektor itself,
+connect it to Projektor's [MCP server](/docs/mcp-server/).
 
 ## Configuration
 

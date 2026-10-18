@@ -3,14 +3,22 @@ title: 'Code coverage'
 date: 2020-10-10T19:30:08+10:00
 draft: false
 weight: 3
+group: 'Features'
 summary: Viewing code coverage stats and trends
 ---
 
 Projektor can visualize code coverage stats in your codebase, helping identify
 areas that need further testing. 
-Currently Projektor supports code coverage from 
-[Jacoco](https://docs.gradle.org/current/userguide/jacoco_plugin.html), 
-[Jest](https://jestjs.io/docs/en/cli.html#--coverageboolean) and [Cobertura](https://cobertura.github.io/cobertura/).
+Projektor supports code coverage reports in these formats:
+
+| Format | Produced by |
+|--------|-------------|
+| [Jacoco](https://docs.gradle.org/current/userguide/jacoco_plugin.html) XML | Jacoco, and [Kover](/docs/gradle-plugin/#kover-code-coverage) using the Jacoco engine |
+| Clover XML | [Jest](https://jestjs.io/docs/en/cli.html#--coverageboolean) (`clover.xml`) and other JavaScript coverage tools |
+| [Cobertura](https://cobertura.github.io/cobertura/) XML | Cobertura and the many tools that can write Cobertura-format reports |
+| [Go coverage profile](#go) | `go test -coverprofile` (Projektor server >=6.1.0) |
+
+Projektor detects the format of each report automatically.
 If your code coverage tool can output a coverage report in one of those formats, you're golden.
 
 Example Projektor report with code coverage:
@@ -22,6 +30,21 @@ Instructions for enabling code coverage with each publisher:
 
 * [Gradle plugin](../gradle-plugin/#code-coverage)
 * [Node script](../node-script/#code-coverage)
+* [GitHub Action](../github-action/)
+
+### Go
+
+Projektor reads Go's native coverage profile format, the file written by `go test -coverprofile`:
+
+`go test -coverprofile=coverage.out ./...`
+
+Then publish the coverage profile along with your test results, for example with the Node script:
+
+`npx projektor-publish --serverUrl=<projektor_url> --coverage=coverage.out test-results/*.xml`
+
+Go's test runner doesn't write JUnit XML itself, so use a tool such as
+[gotestsum](https://github.com/gotestyourself/gotestsum) (`gotestsum --junitfile test-results/results.xml`)
+to write test results Projektor can read.
 
 ## Overall coverage stats
 

@@ -144,6 +144,9 @@ body {
   text-transform: uppercase;
   color: var(--muted);
 }
+.docs-menu-group + .docs-menu-group {
+  margin-top: 22px;
+}
 .docs-menu ul li {
   padding: 0;
   margin: 1px 0;
@@ -365,6 +368,24 @@ body {
   border-radius: 0;
 }
 
+/* Collapsible block from the `details` shortcode */
+.content-details {
+  margin: 0 0 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.content-details summary {
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.content-details[open] summary {
+  border-bottom: 1px solid var(--border);
+}
+.content-details > :not(summary) {
+  margin: 12px 16px;
+}
+
 /* Tables */
 .content table {
   width: 100%;
@@ -456,14 +477,22 @@ body {
   .docs-menu h4 {
     display: none;
   }
-  .docs-menu ul {
+  /* Flatten the nav groups so all the links share a single scrolling row */
+  .docs-menu-groups {
     display: flex;
     gap: 6px;
     overflow-x: auto;
     scrollbar-width: none;
   }
-  .docs-menu ul::-webkit-scrollbar {
+  .docs-menu-groups::-webkit-scrollbar {
     display: none;
+  }
+  .docs-menu-group,
+  .docs-menu ul {
+    display: contents;
+  }
+  .docs-menu-group + .docs-menu-group {
+    margin-top: 0;
   }
   .docs-menu ul li {
     flex: none;

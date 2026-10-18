@@ -2,7 +2,8 @@
 title: 'Jest tests'
 date: 2021-02-08T19:30:08+10:00
 draft: false
-weight: 10
+weight: 17
+group: 'Publishing results'
 summary: Configuring Jest tests to write results for Projektor 
 ---
 
@@ -13,14 +14,20 @@ First, add the `jest-junit` package (https://www.npmjs.com/package/jest-junit) t
 
 ```
   "devDependencies": {
-    "jest-junit": "12.0.0",
+    "jest-junit": "17.0.0",
   }
 ```
 
-Then configure the `jest-junit` package to write the JUnit XMl results file that Projektor understands:
+Then add `jest-junit` as a Jest reporter and configure it to write the JUnit XML results file that Projektor understands:
 
 `package.json`
 ```
+  "jest": {
+    "reporters": [
+      "default",
+      "jest-junit"
+    ]
+  },
   "jest-junit": {
     "includeConsoleOutput": "true",
     "outputDirectory": "jestResults",
@@ -42,7 +49,38 @@ Or in the `projektor.json` configuration file:
 {
   "serverUrl": "<url>",
   "results": [
-    "jestResults/*.xml",
+    "jestResults/*.xml"
+  ]
+}
+```
+
+## Code coverage
+
+To include [code coverage](/docs/code-coverage/) in your Projektor report, turn on coverage collection in Jest:
+
+```
+  "jest": {
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "collectCoverage": true
+  }
+```
+
+Jest's default coverage reporters include `clover`, which writes the `coverage/clover.xml` file that
+Projektor reads. (If you've customized `coverageReporters`, make sure `clover` is in the list.)
+
+Then add the coverage file to your Projektor config:
+
+```
+{
+  "serverUrl": "<url>",
+  "results": [
+    "jestResults/*.xml"
+  ],
+  "coverage": [
+    "coverage/clover.xml"
   ]
 }
 ```

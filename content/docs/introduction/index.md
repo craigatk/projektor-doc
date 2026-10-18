@@ -3,6 +3,7 @@ title: 'Introduction'
 date: 2020-05-02T19:30:08+10:00
 draft: false
 weight: 1
+group: 'Getting started'
 mermaid: true
 summary: How Projektor can make debugging test failures in CI faster and easier
 ---
@@ -20,8 +21,8 @@ To support showing results from the most types of testing frameworks, Projektor 
 JUnit XML results, saves them in a Postgres database, then makes them available to you and your
 team with a simple, shareable URL.
 
-Simply use one of the convenient Projektor publishing plugins for [Gradle](/docs/gradle-plugin/)
-or [Javascript/Node projects](/docs/node-script/) to
+Simply use one of the convenient Projektor publishers - the [Gradle plugin](/docs/gradle-plugin/),
+the [Node script](/docs/node-script/), or the [GitHub Action](/docs/github-action/) - to
 publish your test results as part of your test executions. These plugins handle collecting all
 your project's test results and sending them to the Projektor server for processing and storage.
 Then you will get back the URL to view your results in the Projektor UI.
@@ -46,3 +47,13 @@ To help you make your test suite faster, Projektor also shows the slowest 10 tes
 which tests to focus on to speed up your overall test run:
 
 https://live.projektor.dev/tests/AYAM6TSB8DIS/slow
+
+When many tests fail at once, Projektor [groups the failures by root cause](/docs/test-insights/#failure-clustering)
+so you can tell whether you're looking at one problem or several:
+
+https://live.projektor.dev/tests/RMFRFC19KCZF/failed
+
+And to see whether a failure is new, each test has a [history](/docs/test-insights/#test-case-history) of its
+results across recent builds:
+
+https://live.projektor.dev/tests/DFM7BG7O5VHB/suite/21/case/1/history
