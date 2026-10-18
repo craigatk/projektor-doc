@@ -13,7 +13,7 @@ summary: Configuring and running the Projektor server
 * Java 21+ for Projektor server v6.x.x
 * Java 17+ for Projektor server v5.x.x
 * Java 11+ for Projektor server v4.x.x
-* Postgres
+* Postgres (or, as an alpha feature in v6.6.0+, an S3-compatible object store - see [object store persistence](#object-store-persistence))
 * (optional) S3-compatible object store for storing attachments
 
 ## Changelog
@@ -100,6 +100,23 @@ DB_MAX_POOL_SIZE=<optional - maximum number of pooled database connections>
 
 You can optionally set the database schema to use by setting the `DB_SCHEMA` environment variable.
 If that is not set, the server will default to the `public` schema.
+
+## Object store persistence
+
+**Alpha:** Starting in v6.6.0, Projektor can [store its data in an S3-compatible object store](/docs/object-store-persistence/)
+instead of Postgres. When enabled, the database configuration above isn't needed. To enable it, set:
+
+```
+PERSISTENCE_TYPE=<database (default) or object-store>
+PERSISTENCE_OBJECT_STORE_URL=<url of the object store>
+PERSISTENCE_OBJECT_STORE_BUCKET_NAME=<bucket>
+PERSISTENCE_OBJECT_STORE_ACCESS_KEY=<access_key>
+PERSISTENCE_OBJECT_STORE_SECRET_KEY=<secret_key>
+PERSISTENCE_OBJECT_STORE_KEY_PREFIX=<optional - prefix to put all keys under, so the data can share a bucket with other data>
+PERSISTENCE_OBJECT_STORE_AUTO_CREATE_BUCKET=<optional - true to create the bucket on startup if it does not exist, defaults to false>
+```
+
+The object store must support conditional writes, see [supported object stores](/docs/object-store-persistence/#supported-object-stores).
 
 ## Authentication
 
