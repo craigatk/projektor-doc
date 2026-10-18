@@ -13,6 +13,9 @@ so it supports the same test result, coverage, attachment, and performance forma
 add any dependencies to your project. That makes it a good fit for projects in any language, as long as
 the tests write JUnit XML results.
 
+The latest version of the action is `v16.0.0`, which runs on the Node 24 Actions runtime and includes
+Node script `3.13.15`. Check the [releases](https://github.com/craigatk/projektor-action/tags) for newer versions.
+
 ## Usage
 
 Add a step after your tests run that publishes the results:
@@ -23,7 +26,7 @@ Add a step after your tests run that publishes the results:
 
 - name: Publish results to Projektor
   if: always()
-  uses: craigatk/projektor-action@v15.1.0
+  uses: craigatk/projektor-action@v16.0.0
   with:
     server-url: https://projektor.example.com
     results: test-results/*.xml
@@ -53,7 +56,7 @@ your repository by default. Use a config file for options the action doesn't hav
 such as `codeQuality`, `exitWithFailure`, or `gitMainBranchNames`:
 
 ```yaml
-- uses: craigatk/projektor-action@v15.1.0
+- uses: craigatk/projektor-action@v16.0.0
   with:
     config-file: projektor.json
 ```
@@ -68,7 +71,7 @@ If your Projektor server [requires a publish token](/docs/server/#authentication
 GitHub Actions secret and pass it with the `token` input:
 
 ```yaml
-- uses: craigatk/projektor-action@v15.1.0
+- uses: craigatk/projektor-action@v16.0.0
   with:
     server-url: https://projektor.example.com
     results: test-results/*.xml
@@ -84,7 +87,7 @@ for example to include the link in a notification:
 - name: Publish results to Projektor
   id: projektor
   if: always()
-  uses: craigatk/projektor-action@v15.1.0
+  uses: craigatk/projektor-action@v16.0.0
   with:
     server-url: https://projektor.example.com
     results: test-results/*.xml
@@ -121,3 +124,10 @@ When running in GitHub Actions, the action automatically sends the repository, b
 with your results. That's what powers Projektor features like
 [flaky test detection](/docs/flaky-test/), coverage trends, [pull request comments](/docs/github-pull-request/),
 and [Slack notifications](/docs/slack-notification/) - no extra configuration needed.
+
+## Changelog
+
+* v16.0.0
+  * **Breaking change:** the action now runs on the Node 24 Actions runtime (previously Node 16), so it
+    needs a runner that supports Node 24. GitHub-hosted runners do; self-hosted runners may need to be updated.
+  * Updated to Node script `3.13.15` (previously `3.12.2`) and other dependency updates
