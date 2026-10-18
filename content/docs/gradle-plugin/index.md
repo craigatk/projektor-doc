@@ -2,7 +2,8 @@
 title: 'Gradle plugin'
 date: 2020-05-02T19:30:08+10:00
 draft: false
-weight: 11
+weight: 14
+group: 'Publishing results'
 summary: Gradle plugin for easily publishing test results and code coverage statistics to Projektor
 ---
 
@@ -95,8 +96,21 @@ each project in the build that uses Jacoco.
 
 Kover is a recent code coverage tool from JetBrains for the Kotlin language: https://github.com/Kotlin/kotlinx-kover
 
-Starting in Projektor Gradle plugin `7.8.2` Projektor supports gathering and publishing reports
-from the Kover plugin when it is configured to use the Jacoco engine.
+Projektor supports gathering and publishing reports from the Kover plugin when it is configured to use the Jacoco engine.
+With Projektor Gradle plugin `10.0.0` and higher, use Kover `0.7.1` or higher - for example:
+
+```
+plugins {
+  id "org.jetbrains.kotlinx.kover" version "0.9.1"
+}
+
+kover {
+  useJacoco()
+}
+```
+
+Projektor collects the XML report from the `koverXmlReport` task, so include that task in your build
+(e.g. `./gradlew test koverXmlReport`).
 
 Projektor supports gathering Jacoco and Kover reports from different subprojects in a multi-project build.
 For example, you may have a multi-project build where some subprojects use Java so they gather code
@@ -107,8 +121,9 @@ Otherwise, you may get duplicate coverage reports in Projektor.
 
 Key for using Kover coverage with Projektor:
 
-* Use Projektor Gradle plugin `7.8.2` or higher
-* Configure Kover to use the Jacoco engine
+* Use Kover `0.7.1` or higher with Projektor Gradle plugin `10.0.0` or higher (older plugin versions support Kover starting with `7.8.2`)
+* Configure Kover to use the Jacoco engine with `useJacoco()`
+* Run the `koverXmlReport` task as part of your build
 * Only have the Kover Gradle plugin in the project, don't add the Jacoco Gradle plugin as well
 
 #### Combining code coverage from multiple test tasks
@@ -126,6 +141,57 @@ jacocoTestReport {
     executionData { tasks.withType(Test)*.jacoco.destinationFile }
 }
 ```
+
+### Publish token
+
+If your Projektor server [requires a publish token](/docs/server/#authentication), set it with the
+`publishToken` parameter. To keep the token out of your build file, read it from an environment variable
+such as a CI secret:
+
+```
+projektor {
+  serverUrl = "https://myserver"
+  publishToken = System.getenv("PROJEKTOR_TOKEN")
+}
+```
+
+### Combining results from multiple builds
+
+If your CI build runs tests across several separate Gradle executions (for example, separate jobs for unit
+and integration tests), set `groupResults = true` to combine them into a single Projektor report.
+Projektor groups results by the CI build number, read from the environment variables in
+`buildNumberEnvironmentVariables` (`GITHUB_RUN_NUMBER` or `VELA_BUILD_NUMBER` by default).
+
+### Link file
+
+When publishing in CI, the plugin writes a `projektor_report.json` file to the project directory with
+the report's `id` and `report_url`, so later steps in your CI pipeline can link to the report.
+Change the file name with `linkFileName`, or turn it off with `writeLinkFile = false`.
+
+### CI and Git environment variables
+
+The plugin reads the Git repository, branch, commit SHA, and pull request number from your CI system's
+environment variables, which Projektor needs for features like [flaky test detection](/docs/flaky-test/),
+coverage trends, and [pull request comments](/docs/github-pull-request/).
+The defaults cover GitHub Actions, Vela, and Drone. For other CI systems, point the plugin at the
+environment variables your CI system sets, for example for GitLab CI:
+
+```
+projektor {
+  serverUrl = "https://myserver"
+  gitRepoEnvironmentVariables = ["CI_PROJECT_PATH"]
+  gitBranchEnvironmentVariables = ["CI_COMMIT_REF_NAME"]
+  gitCommitShaEnvironmentVariables = ["CI_COMMIT_SHA"]
+  gitPullRequestNumberEnvironmentVariables = ["CI_MERGE_REQUEST_IID"]
+  buildNumberEnvironmentVariables = ["CI_PIPELINE_IID"]
+}
+```
+
+Each parameter takes a list of environment variable names, and the plugin uses the first one that's set. If no
+repository is found in the environment variables, the plugin falls back to reading the Git repository
+the build is running in.
+Similarly, the plugin decides whether the build is running in CI by checking the environment variables in
+`ciEnvironmentVariables` (`CI`, `VELA`, and `DRONE` by default).
 
 ### Code quality reports
 
@@ -173,6 +239,18 @@ projektor {
 | slackMessageFileName      | `String`         |  `projektor_failure_message.json` | Name of the Slack message file (if enabled) |
 | codeCoveragePublish       | `boolean`        | `true`   | Whether to include code coverage data in the Projektor report (if the build has coverage enabled with the Jacoco plugin) |
 | gitMainBranchNames        | `List<String>`   | `["main", "master"]`              | List of the mainline branches for this repo. Mainline branches are used when calculating things like current code coverage for the repo. |
+| publishTaskEnabled        | `boolean`        | `true`   | Whether to add the `publishResults` task to the project |
+| groupResults              | `boolean`        | `false`  | Combine results published from the same CI build number into a single report. See [Combining results from multiple builds](#combining-results-from-multiple-builds) |
+| writeLinkFile             | `boolean`        | `true`   | Whether to write a JSON file with the report's link when publishing in CI |
+| linkFileName              | `String`         | `projektor_report.json` | Name of the link file (if enabled) |
+| gitInfoEnabled            | `boolean`        | `true`   | Whether to collect Git repository, branch, and commit information to send with the results |
+| gitRepoEnvironmentVariables | `List<String>` | `["VELA_REPO_FULL_NAME", "DRONE_REPO", "GITHUB_REPOSITORY"]` | Environment variables to read the Git repository name (`org/repo`) from |
+| gitRefEnvironmentVariables | `List<String>`  | `["VELA_BUILD_REF", "GITHUB_REF"]` | Environment variables to read the Git ref from |
+| gitBranchEnvironmentVariables | `List<String>` | `["VELA_PULL_REQUEST_SOURCE", "DRONE_COMMIT_BRANCH"]` | Environment variables to read the Git branch name from |
+| gitCommitShaEnvironmentVariables | `List<String>` | `["VELA_BUILD_COMMIT", "GITHUB_SHA"]` | Environment variables to read the Git commit SHA from |
+| gitPullRequestNumberEnvironmentVariables | `List<String>` | `["VELA_BUILD_PULL_REQUEST", "DRONE_PULL_REQUEST"]` | Environment variables to read the pull request number from |
+| buildNumberEnvironmentVariables | `List<String>` | `["VELA_BUILD_NUMBER", "GITHUB_RUN_NUMBER"]` | Environment variables to read the CI build number from, used with `groupResults` |
+| ciEnvironmentVariables    | `List<String>`   | `["CI", "VELA", "DRONE"]` | Environment variables that indicate the build is running in CI |
 
 ** _Required_
 

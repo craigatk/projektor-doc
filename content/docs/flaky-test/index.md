@@ -3,6 +3,7 @@ title: 'Flaky test detection'
 date: 2020-10-04T19:30:08+10:00
 draft: false
 weight: 5
+group: 'Features'
 summary: Flaky test detection with Projektor
 ---
 
@@ -33,4 +34,4 @@ To get to the flaky tests page, click on the "Repository" link on the left side 
 ## Prerequisites
 
 Flaky test detection in Projektor requires [Gradle plugin v6.0.0+](/docs/gradle-plugin), 
-[Node plugin v2.8.0+](/docs/node-script), or [GitHub Action v11+](https://github.com/craigatk/projektor-action).
+[Node plugin v2.8.0+](/docs/node-script), or [GitHub Action v11+](/docs/github-action/).

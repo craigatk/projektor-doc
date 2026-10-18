@@ -1,12 +1,24 @@
 {{ $currentID := "" }}
 {{ with .File }}{{ $currentID = .UniqueID }}{{ end }}
+{{ $pages := where .Site.RegularPages "Section" .Section }}
+{{/* Nav groups in display order - each page picks one with the `group` frontmatter param */}}
+{{ $groups := slice "Getting started" "Features" "Publishing results" "Server & API" }}
 <nav class="docs-menu">
-  <h4>{{ .Section | humanize }}</h4>
-  <ul>
-    {{ range (where .Site.RegularPages "Section" .Section) }}
-    <li class="{{ if eq .File.UniqueID $currentID }}active {{ end }}">
-      <a href="{{ .Permalink }}">{{ .Title }}</a>
-    </li>
+  <div class="docs-menu-groups">
+    {{ range $groups }}
+    {{ $groupPages := where $pages "Params.group" . }}
+    {{ if $groupPages }}
+    <div class="docs-menu-group">
+      <h4>{{ . }}</h4>
+      <ul>
+        {{ range $groupPages }}
+        <li class="{{ if eq .File.UniqueID $currentID }}active {{ end }}">
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
     {{ end }}
-  </ul>
+    {{ end }}
+  </div>
 </nav>

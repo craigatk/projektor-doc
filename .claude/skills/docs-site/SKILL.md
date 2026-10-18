@@ -23,17 +23,25 @@ title: 'Page title'
 date: 2020-05-02T19:30:08+10:00
 draft: false
 weight: 10
+group: 'Features'
 summary: One-line summary shown on the docs index page
 ---
 ```
 
-- `weight` controls ordering in the docs nav — lower comes first. Check existing weights before
-  picking one (`grep -h weight content/docs/*/index.md`); several pages already share a weight
-  (e.g. `ai` and `badge` are both `7`), so a collision isn't fatal, but prefer the next unused
-  value at the end unless the page genuinely belongs earlier in the flow.
+- `group` puts the page under a heading in the docs nav, and is required — a page without one
+  doesn't appear in the nav. It must be one of the groups listed in `layouts/partials/sidebar.html`:
+  `Getting started`, `Features`, `Publishing results`, or `Server & API`.
+- `weight` controls ordering in the docs nav — lower comes first — and every page has a unique
+  weight. Check existing weights before picking one
+  (`grep -h weight content/docs/*/index.md`), and pick an unused value within the page's group.
+  If none is free, renumber the pages after it rather than reusing a weight.
 - `date` uses the `+10:00` offset format seen throughout, for consistency with existing pages —
   match it rather than using local time.
 - `summary` is used for the content summary on the docs homepage.
+- For long content that most readers can skip, such as a full example output, wrap it in the
+  `details` shortcode (`layouts/shortcodes/details.html`) to make it collapsible:
+  `{{</* details summary="Full example" */>}}` ... `{{</* /details */>}}`. Raw HTML isn't enabled
+  in the site's markdown config, so use the shortcode rather than a `<details>` tag.
 - `mermaid: true` in frontmatter enables the mermaid shortcode (see
   `content/docs/introduction/index.md` and `layouts/shortcodes/mermaid.html`) if a page needs a
   diagram.

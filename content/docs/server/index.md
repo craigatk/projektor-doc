@@ -2,7 +2,8 @@
 title: 'Server'
 date: 2020-05-02T19:30:08+10:00
 draft: false
-weight: 13
+weight: 18
+group: 'Server & API'
 summary: Configuring and running the Projektor server
 ---
 
@@ -34,14 +35,37 @@ The server listens on port `8080` by default. To use a different port, set:
 PORT=<port for the server to listen on>
 ```
 
-### Java 17+ troubleshooting
+### Docker
 
-If you encounter `InaccessibleObjectException` exceptions when running with Java 17+, add params
-`--add-opens=java.base/sun.net.www.protocol.https=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED` to the `java` execution:
+The Projektor repository includes a `Dockerfile` that builds the server and UI from source into an image
+that runs on Java 21:
+
+```
+git clone https://github.com/craigatk/projektor.git
+cd projektor
+docker build -t projektor .
+```
+
+Then run it with the same environment variables you'd use when running the `.jar` directly:
+
+```
+docker run -p 8080:8080 \
+  -e DB_URL=jdbc:postgresql://<db-host>:5432/projektordb \
+  -e DB_USERNAME=<username> \
+  -e DB_PASSWORD=<password> \
+  projektor
+```
+
+### InaccessibleObjectException troubleshooting
+
+If you encounter `InaccessibleObjectException` exceptions (for example, when Projektor posts
+[pull request comments](/docs/github-pull-request/)), add these params to the `java` execution:
 
 `java --add-opens=java.base/sun.net.www.protocol.https=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED -jar projektor-server-<version>.jar`
 
-The library that Projektor users for posting comments to GitHub PRs contains reflection code that can be impacted by running Java 17+.
+The library that Projektor uses for posting comments to GitHub PRs contains reflection code that can be
+blocked by the stricter module access checks in Java 17 and later, including the Java 21+ that
+Projektor server v6 requires.
 
 ## Database configuration
 

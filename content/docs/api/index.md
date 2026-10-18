@@ -2,7 +2,8 @@
 title: 'API'
 date: 2023-03-29T19:30:08+10:00
 draft: false
-weight: 11
+weight: 19
+group: 'Server & API'
 summary: Programmatically access Projektor data via a REST API
 ---
 
@@ -33,7 +34,7 @@ Available in Projektor server versions >=4.35.0
 |-----------------------|---------------------------------------------------------------|
 | `id`                  | Test run ID that produced the given code coverage data        |
 | `created_timestamp`   | When the code coverage data was recorded                      |
-| `covered_perecentage` | The percentage of covered lines in the repo                   |
+| `covered_percentage` | The percentage of covered lines in the repo                   |
 | `repo`                | The name of the repo                                          |
 | `project`             | The subproject in the repo (optional)                         |
 | `branch`              | The name of the branch where the code coverage data came from |
@@ -67,7 +68,7 @@ Available in Projektor server versions >=4.35.0
 |-----------------------|---------------------------------------------------------------|
 | `id`                  | Test run ID that produced the given code coverage data        |
 | `created_timestamp`   | When the code coverage data was recorded                      |
-| `covered_perecentage` | The percentage of covered lines in the repo                   |
+| `covered_percentage` | The percentage of covered lines in the repo                   |
 | `repo`                | The name of the repo                                          |
 | `project`             | The subproject in the repo (optional)                         |
 | `branch`              | The name of the branch where the code coverage data came from |
