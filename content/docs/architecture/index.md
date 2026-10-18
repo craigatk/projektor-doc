@@ -16,7 +16,8 @@ dashboard:
   or [GitHub Action](/docs/github-action/) collects those results as part of the test run and sends them to the Projektor
   server.
 * **Projektor server** — parses the incoming results, stores structured test, coverage, and
-  performance data in [Postgres](/docs/server/), and stores larger binary attachments like
+  performance data in [Postgres](/docs/server/) (or, as an alpha feature, in an
+  [object store](/docs/object-store-persistence/)), and stores larger binary attachments like
   screenshots in an S3-compatible object store.
 * **Projektor UI** — queries the server to render test results, attachments, coverage, and trends
   in the browser.
