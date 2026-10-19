@@ -76,5 +76,5 @@ to `data/`) so Projektor's data is kept separate from the attachment files.
   trends, flaky tests, test case history) read the repository's whole history from the object store.
   Configure [cleanup](/docs/server/#database-cleanup) with `MAX_REPORT_AGE_DAYS` to keep that history
   bounded.
-* **No storage metrics yet.** The object store backend doesn't publish timing metrics or tracing spans for
-  its reads and writes.
+* **No storage metrics before v6.7.0.** Starting in v6.7.0 the server publishes
+  [persistence metrics](/docs/server/#persistence-metrics) and traces for object store reads and writes.
