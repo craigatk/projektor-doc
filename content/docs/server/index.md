@@ -196,8 +196,45 @@ ktor server metrics as well as a few custom metrics:
 * `coverage_process_failure` - when there is an error processing a code coverage report (any error besides a parse error)
 * `pull_request_comment_success` - when the server successfully comments on a pull request
 * `pull_request_comment_failure` - when there is a failure commenting a pull request
+* `slack_notification_success` - when the server successfully posts a [Slack notification](/docs/slack-notification/)
+* `slack_notification_failure` - when there is a failure posting a Slack notification
 
 The list of metrics is also in the server codebase in `MetricsService.kt`
+
+### Persistence metrics
+
+Starting in v6.7.0, the server also publishes metrics on its storage, for both the Postgres and
+[object store](/docs/object-store-persistence/) backends:
+
+* `persistence_repository_call` - timer for each call to the storage layer, tagged with `backend`
+  (`database` or `object-store`), `repository`, `method`, and `outcome` (`success`, `error`, or `cancelled`)
+* `object_store_request` - timer for each request to an object store, tagged with `operation`
+  (for example `get`, `put`, `list`, `delete`), `bucket`, and `outcome` (`success`, `not_found`,
+  `precondition_failed`, or `error`). Covers attachment requests as well as object store persistence.
+* `object_store_update_conflict` - counter, tagged with `bucket`, for each time an object store update lost a race
+  with another writer and was retried
+* `object_store_update_exhausted` - counter, tagged with `bucket`, for each object store update that gave up after
+  too many conflicting writers
+
+With the Postgres backend, the database connection pool also publishes the standard HikariCP
+connection pool metrics (`hikaricp_connections_*`).
+
+### Tracing
+
+When the server runs with the [OpenTelemetry Java agent](https://opentelemetry.io/docs/zero-code/java/agent/),
+each storage call gets a span named `projektor.<repository>.<method>` (for example
+`projektor.TestRunRepository.fetchTestRun`), with the test run ID in `projektor.id` when the call has one.
+The database queries or object store requests (`projektor.objectStore.<operation>`) the call makes are
+nested under it.
+
+### Slow storage calls
+
+The server logs a warning for each storage call that takes longer than a threshold, defaulting to 1000 ms,
+whether or not metrics are enabled:
+
+```
+PERSISTENCE_SLOW_CALL_THRESHOLD_MS=<optional - log storage calls slower than this many milliseconds, defaults to 1000>
+```
 
 ## Database cleanup
 
